@@ -1,0 +1,100 @@
+package mastermind;
+
+import java.util.ArrayList;
+import java.util.ListIterator;
+
+public class Tablero implements Dibujable {
+	
+	private ArrayList<Comb_y_result> comb_y_resultados;
+	private Combinacion cifrado;
+	
+	public Tablero(Dificultad dificultad){
+		cifrado = new Combinacion(dificultad.casillas); // Fila del cifrado
+		comb_y_resultados = new ArrayList<>(); // Combinaciones y sus respectivos resultados
+	}
+
+	
+	public void dibujar_elemento() {
+		final int NUM_CASILLAS,NUM_BORDES,SEPARACION = 2,BORDE_x_CASILLA=3,BORDE_x_ACIERTO=2;
+		ListIterator<Comb_y_result> itComb; //Iterador para las combinaciones
+		
+		NUM_CASILLAS = cifrado.combinacion.length;
+		NUM_BORDES = 2*SEPARACION + NUM_CASILLAS * BORDE_x_CASILLA + NUM_CASILLAS * BORDE_x_ACIERTO;
+		
+		for (int i = 0; i < NUM_BORDES; i++) {
+			System.out.printf("_");//Tantos _ como caracteres ocupe el ancho del tablero (cada casilla son tres _ y cada acierto dos, el borde izquierdo son otros dos y las separacion dos mas
+		}
+		
+		System.out.println();
+		
+		for (itComb = comb_y_resultados.listIterator(comb_y_resultados.size()); itComb.hasPrevious();) {
+			
+			Combinacion combinacion = itComb.previous();
+			
+			combinacion.dibujar_elemento();
+			System.out.printf("|");
+			if (itComb.hasPrevious()) {
+				for (int i = 0; i < (NUM_BORDES - SEPARACION - NUM_CASILLAS * BORDE_x_ACIERTO) - 1; i++) {
+					System.out.printf(" "); //Número de espacios desde el borde izquierdo hasta la primera separación
+				}
+				System.out.printf("|");
+				for (int i = 0; i < (SEPARACION + NUM_CASILLAS * BORDE_x_ACIERTO) - 1; i++) {
+					System.out.printf(" "); //Número de espacios desde la separación hasta el borde derecho
+				}
+				System.out.println("|");
+			}else {
+				for (int i = 0; i < (NUM_BORDES - SEPARACION - NUM_CASILLAS * BORDE_x_ACIERTO) - 1; i++) {
+					System.out.printf("_"); //Número de guiones bajos(borde inferior) desde el borde izquierdo hasta la primera separación
+				}
+				System.out.printf("|");
+				for (int i = 0; i < (SEPARACION + NUM_CASILLAS * BORDE_x_ACIERTO) - 1; i++) {
+					System.out.printf("_"); //Número de guiones bajos(borde inferior) desde la separación hasta el borde derecho
+				}
+				System.out.println("|");
+			}
+		}
+
+		cifrado.dibujar_elemento();
+		System.out.println("\n\n");
+	}
+	
+	public void dibujar_comb_actual() {
+		comb_y_resultados.get(ultima_combinacion_y_result()).dibujar_solo_combinacion();
+	}
+	
+	public void dibujar_cifrado() {
+		cifrado.dibujar_elemento();
+	}
+	
+	
+	public void añadir_combinacion() {
+		comb_y_resultados.add(new Comb_y_result(cifrado.tamaño()));
+	}
+	
+	public int ultima_combinacion_y_result() {
+		return (comb_y_resultados.size() - 1);
+	}
+	
+	public int numero_de_casillas() {
+		return cifrado.tamaño();
+	}
+	
+	public Casilla[] coger_ultima_combinacion() {
+		return comb_y_resultados.get(ultima_combinacion_y_result()).getCombinacion();
+	}
+
+	public Casilla[] coger_cifrado() {
+		return cifrado.getCombinacion();
+	}
+	
+	public Combinacion getCifrado() {
+		return cifrado;
+	}
+	
+	public ArrayList<Comb_y_result> getComb_y_result(){
+		return comb_y_resultados;
+	}
+	
+	
+
+}
