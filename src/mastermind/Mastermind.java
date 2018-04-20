@@ -5,7 +5,7 @@ public class Mastermind {
 	private Partida partida;
 
 	public Mastermind() {
-		
+		menu_principal();
 	}
 
 	public void mostrar_Mastermind() {
@@ -30,7 +30,7 @@ public class Mastermind {
 	public void menu_principal() {
 		mostrar_Mastermind();
 		switch (Teclado.lecturaconlimites(1, 3, Teclado.LimiteInfySup.INCLUIDOS,
-				"\n\n%s1.- Jugar\n%1$s2.- Creditos\n%1$s3.- Salir del juego\n")) {
+				"\n\n1.- Jugar\n2.- Creditos\n3.- Salir del juego\n")) {
 			case 1:
 				dificultades();
 				break;
@@ -49,7 +49,7 @@ public class Mastermind {
 	public void dificultades() {
 		mostrar_Mastermind();
 		switch (Teclado.lecturaconlimites(1, 3, Teclado.LimiteInfySup.INCLUIDOS,
-				"\n\n%sDificultad\n\n%1$s1.- Fácil(Dos modos)\n%1$s2.-Medio\n%1$s3.- Difícil")) {
+				"\n\nDificultad\n\n1.- Fácil(Dos modos)\n2.-Medio\n3.- Difícil")) {
 			case 1:
 				modos_dific_facil();
 				break;
@@ -69,7 +69,7 @@ public class Mastermind {
 	public void modos_dific_facil() {
 		mostrar_Mastermind();
 		switch (Teclado.lecturaconlimites(1, 3, Teclado.LimiteInfySup.INCLUIDOS,
-				"\n\n%1$sModos de la dificultad fácil\n\n%1$s1.- Descifrando combinaciones\n%1$s2.-Cifrando e indicando aciertos\n\n")) {
+				"\n\nModos de la dificultad fácil\n\n1.- Descifrando combinaciones\n2.-Cifrando e indicando aciertos\n\n")) {
 			case 1:
 				partida = new Partida(Dificultad.FACIL,false);
 				partida.partida_facil_descifrando();
