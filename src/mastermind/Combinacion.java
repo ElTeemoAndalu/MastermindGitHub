@@ -42,7 +42,7 @@ public class Combinacion implements Dibujable, Cloneable {
 
 	}
 	
-	public int tamaño() {
+	public int tamanio() {
 		return combinacion.length;
 	}
 	

@@ -38,10 +38,10 @@ public class IA extends Jugador {
 
 	public void introducir_fila(Combinacion combinacion) {
 		if (!filaCreada) {
-			tablero.añadir_combinacion();
+			tablero.aniadir_combinacion();
 			filaCreada = true;
 		}
-		for (int i = 0; i < tablero.getCifrado().tamaño(); i++) {
+		for (int i = 0; i < tablero.getCifrado().tamanio(); i++) {
 			introducir_bola(i, combinacion.getCombinacion()[i].getColor(), tablero);
 		}
 		confirmar_fila(tablero);
@@ -49,7 +49,7 @@ public class IA extends Jugador {
 	}
 
 	public void introducir_cifrado(Combinacion combinacion, Tablero tablero) {
-		for (int i = 0; i < tablero.getCifrado().tamaño(); i++) {
+		for (int i = 0; i < tablero.getCifrado().tamanio(); i++) {
 			introducir_bola(i, combinacion.getCombinacion()[i].getColor(), tablero);
 		}
 		confirmar_fila(tablero);

@@ -18,7 +18,7 @@ public abstract class Jugador {
 
 		if (!filaCreada && turno > 0) { // Se crea un objeto combinacion y resultado cada ver que se intenta añadir la
 										// primera bola de una combinacion que no sea la del cifrado
-			tablero.añadir_combinacion(); // Las
+			tablero.aniadir_combinacion(); // Las
 											// combinaciones serán del mismo tamaño que el cifrado
 			filaCreada = true;
 		}

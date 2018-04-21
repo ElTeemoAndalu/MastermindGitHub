@@ -67,8 +67,8 @@ public class Tablero implements Dibujable {
 	}
 	
 	
-	public void añadir_combinacion() {
-		comb_y_resultados.add(new Comb_y_result(cifrado.tamaño()));
+	public void aniadir_combinacion() {
+		comb_y_resultados.add(new Comb_y_result(cifrado.tamanio()));
 	}
 	
 	public int ultima_combinacion_y_result() {
@@ -76,7 +76,7 @@ public class Tablero implements Dibujable {
 	}
 	
 	public int numero_de_casillas() {
-		return cifrado.tamaño();
+		return cifrado.tamanio();
 	}
 	
 	public Casilla[] coger_ultima_combinacion() {
