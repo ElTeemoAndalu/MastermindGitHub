@@ -3,12 +3,12 @@ package mastermind;
 public enum Color {
 	
 	NEGRO("\u001B[40m"),
-	ROJO("\u001B[41m"),
+	ROJO("\u001B[101m"),
 	VERDE("\u001B[42m"),
-	AMARILLO("\u001B[43m"),
-	AZUL("\u001B[44m"),
-	MORADO("\u001B[45m"),
-	CELESTE("\u001B[46m"),
+	AMARILLO("\u001B[103m"),
+	AZUL("\u001B[104m"),
+	MORADO("\u001B[105m"),
+	CELESTE("\u001B[106m"),
 	BLANCO("\u001B[47m"),
 	GRIS("\u001B[1;40m"),
 	VERDE_CLARO("\u001B[1;42m"),

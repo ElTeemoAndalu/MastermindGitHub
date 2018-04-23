@@ -18,7 +18,7 @@ public class IA extends Jugador {
 			tablero = new Tablero(dificultad);
 		}
 		
-		if (cifrando) {
+		if (!cifrando) {
 			turno = 0;
 		}else {
 			turno = 1;
