@@ -65,7 +65,7 @@ public class Partida {
 		}
 
 		if (dificultad == Dificultad.FACIL) {
-			System.out.printf("%d.- Salir al menú principal\n", opcion_salir);
+			System.out.printf("%d.- Salir al menu principal\n", opcion_salir);
 		} else {
 			System.out.printf("%d.- Rendirse\n", opcion_salir);
 		}
@@ -83,7 +83,7 @@ public class Partida {
 
 	}
 
-	// Métodos que dictaminan como funcionan las partidas
+	// Metodos que dictaminan como funcionan las partidas
 	public void partida_facil_cifrando() {
 		boolean ganador = false, fila_valida = false;
 		int seleccion;
@@ -113,7 +113,7 @@ public class Partida {
 							new Mastermind().menu_principal();
 						}
 						if (!fila_valida) {
-							System.out.println("La fila no es válida.");
+							System.out.println("La fila no es valida.");
 						}
 					} while (!fila_valida);
 				}

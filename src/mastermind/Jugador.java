@@ -19,12 +19,12 @@ public abstract class Jugador {
 		if (!filaCreada && turno > 0) { // Se crea un objeto combinacion y resultado cada ver que se intenta aÃ±adir la
 										// primera bola de una combinacion que no sea la del cifrado
 			tablero.aniadir_combinacion(); // Las
-											// combinaciones serÃ¡n del mismo tamaÃ±o que el cifrado
+											// combinaciones serán del mismo tamaño que el cifrado
 			filaCreada = true;
 		}
 
 		System.out.println(
-				"Â¿En que posicion desea introducir la bola? (Introduzca 0 para volver a la pantalla anterior):\n");
+				"¿En que posicion desea introducir la bola? (Introduzca 0 para volver a la pantalla anterior):\n");
 
 		tablero.dibujar_comb_actual();
 
@@ -32,7 +32,7 @@ public abstract class Jugador {
 
 		if (tablero.numero_de_casillas() <= NUM_CASILLAS_DIF_MEDIA) {// Se limitan y muestran los colores disponibles
 																		// segun la dificultad
-			num_colores = Dificultad.FACIL.getColores();// El nÃºmero de colores de la dificultad fÃ¡cil y media son los
+			num_colores = Dificultad.FACIL.getColores();// El número de colores de la dificultad fácil y media son los
 														// mismos
 			System.out.printf(
 					"Introduzca el color de la bola:(Introduzca 0 para volver al menu de partida)\n1.-%s  %s  2.-%s  %2$s\n3.-%s  %2$s  4.-%s  %2$s\n5.-%s  %2$s  6.-%s  %2$s\n7.-%s  %2$s  8.-%s  %2$s\n",

@@ -49,7 +49,7 @@ public class Mastermind {
 	public void dificultades() {
 		mostrar_Mastermind();
 		switch (Teclado.lecturaconlimites(1, 3, Teclado.LimiteInfySup.INCLUIDOS,
-				"\n\nDificultad\n\n1.- Fácil(Dos modos)\n2.-Medio\n3.- Difícil")) {
+				"\n\nDificultad\n\n1.- Facil(Dos modos)\n2.-Medio\n3.- Dificil")) {
 			case 1:
 				modos_dific_facil();
 				break;
@@ -69,7 +69,7 @@ public class Mastermind {
 	public void modos_dific_facil() {
 		mostrar_Mastermind();
 		switch (Teclado.lecturaconlimites(1, 3, Teclado.LimiteInfySup.INCLUIDOS,
-				"\n\nModos de la dificultad fácil\n\n1.- Descifrando combinaciones\n2.-Cifrando e indicando aciertos\n\n")) {
+				"\n\nModos de la dificultad facil\n\n1.- Descifrando combinaciones\n2.-Cifrando e indicando aciertos\n\n")) {
 			case 1:
 				partida = new Partida(Dificultad.FACIL,false);
 				partida.partida_facil_descifrando();
@@ -86,7 +86,7 @@ public class Mastermind {
 	public void creditos() {
 		mostrar_Mastermind();
 		System.out.println(
-				"Director: Nicolás Navas Gómez\n\nProgramador: Nicolás Navas Gómez\n\nAnalista: Nicolás Navas Gómez");
+				"Director: Nicolas Navas Gomez\n\nProgramador: Nicolas Navas Gomez\n\nAnalista: Nicolas Navas Gomez");
 	}
 
 	

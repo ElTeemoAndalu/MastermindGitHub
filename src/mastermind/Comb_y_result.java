@@ -8,13 +8,13 @@ public class Comb_y_result extends Combinacion {
 
 	public Comb_y_result(int num_casillas) {
 		super(num_casillas);
-		resultados = new Indicador[num_casillas];// El número de casillas es igual que el número de indicadores
+		resultados = new Indicador[num_casillas];// El numero de casillas es igual que el numero de indicadores
 		for (int i = 0; i < resultados.length; i++) {
 			resultados[i] = new Indicador();
 		}
 	}
 
-	// Metodo para dibujar la combinación y su resultado
+	// Metodo para dibujar la combinacion y su resultado
 	public void dibujar_elemento() {
 		super.dibujar_elemento();
 		for (int i = 0; i < tamanio(); i++) {
@@ -39,10 +39,6 @@ public class Comb_y_result extends Combinacion {
 			resultados[i].setColor(Color.BLANCO);
 		}
 		
-	}
-
-	public Casilla[] getCombinacion() {
-		return combinacion;
 	}
 
 	// Equals

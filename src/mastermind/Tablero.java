@@ -36,20 +36,20 @@ public class Tablero implements Dibujable {
 			System.out.printf("|");
 			if (itComb.hasPrevious()) {
 				for (int i = 0; i < (NUM_BORDES - SEPARACION - NUM_CASILLAS * BORDE_x_ACIERTO) - 1; i++) {
-					System.out.printf(" "); //Número de espacios desde el borde izquierdo hasta la primera separación
+					System.out.printf(" "); //Numero de espacios desde el borde izquierdo hasta la primera separación
 				}
 				System.out.printf("|");
 				for (int i = 0; i < (SEPARACION + NUM_CASILLAS * BORDE_x_ACIERTO) - 1; i++) {
-					System.out.printf(" "); //Número de espacios desde la separación hasta el borde derecho
+					System.out.printf(" "); //Numero de espacios desde la separación hasta el borde derecho
 				}
 				System.out.println("|");
 			}else {
 				for (int i = 0; i < (NUM_BORDES - SEPARACION - NUM_CASILLAS * BORDE_x_ACIERTO) - 1; i++) {
-					System.out.printf("_"); //Número de guiones bajos(borde inferior) desde el borde izquierdo hasta la primera separación
+					System.out.printf("_"); //Numero de guiones bajos(borde inferior) desde el borde izquierdo hasta la primera separación
 				}
 				System.out.printf("|");
 				for (int i = 0; i < (SEPARACION + NUM_CASILLAS * BORDE_x_ACIERTO) - 1; i++) {
-					System.out.printf("_"); //Número de guiones bajos(borde inferior) desde la separación hasta el borde derecho
+					System.out.printf("_"); //Numero de guiones bajos(borde inferior) desde la separación hasta el borde derecho
 				}
 				System.out.println("|");
 			}
