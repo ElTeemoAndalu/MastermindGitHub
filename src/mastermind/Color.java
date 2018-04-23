@@ -9,10 +9,11 @@ public enum Color {
 	AZUL("\u001B[104m"),
 	MORADO("\u001B[105m"),
 	CELESTE("\u001B[106m"),
-	BLANCO("\u001B[47m"),
-	GRIS("\u001B[1;40m"),
-	VERDE_CLARO("\u001B[1;42m"),
+	GRIS("\u001B[47m"),
+	BLANCO("\u001B[1;107m"),
+	VERDE_CLARO("\u001B[1;102m"),
 	RESETEAR("\u001B[0m");
+	
 	
 	private String cod_color;
 	
