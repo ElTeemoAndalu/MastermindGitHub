@@ -4,10 +4,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class IA extends Jugador {
-
-	private Tablero tablero;
-	private int turno;
-	private boolean filaCreada;
+	
 	private HashMap<Combinacion, Integer> tableroAux;
 
 	protected IA(Dificultad dificultad) {
@@ -20,7 +17,13 @@ public class IA extends Jugador {
 		if (dificultad == Dificultad.FACIL) {
 			tablero = new Tablero(dificultad);
 		}
-		turno = 0;
+		
+		if (cifrando) {
+			turno = 0;
+		}else {
+			turno = 1;
+		}
+		
 		filaCreada = false;
 	}
 

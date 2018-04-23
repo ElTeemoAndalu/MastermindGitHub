@@ -14,11 +14,11 @@ public enum Color {
 	VERDE_CLARO("\u001B[1;42m"),
 	RESETEAR("\u001B[0m");
 	
+	private String cod_color;
+	
 	private Color(String cod_color) {
 		this.cod_color = cod_color;
 	}
-	
-	String cod_color;
 	
 	public String getCod_Color() {
 		return cod_color;

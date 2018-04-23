@@ -35,7 +35,7 @@ public class Combinacion implements Dibujable, Cloneable {
 	@Override
 	public void dibujar_elemento() {
 		System.out.printf("| ");
-		for (int i = 0; i < combinacion.length; i++) {
+		for (int i = 0; i < tamanio(); i++) {
 			combinacion[i].dibujar_elemento();
 		}
 		System.out.printf("| ");

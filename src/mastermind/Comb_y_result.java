@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 public class Comb_y_result extends Combinacion {
 
-	private Casilla combinacion[];
 	private Indicador resultados[];
 
 	public Comb_y_result(int num_casillas) {
@@ -18,7 +17,7 @@ public class Comb_y_result extends Combinacion {
 	// Metodo para dibujar la combinación y su resultado
 	public void dibujar_elemento() {
 		super.dibujar_elemento();
-		for (int i = 0; i < combinacion.length; i++) {
+		for (int i = 0; i < tamanio(); i++) {
 			resultados[i].dibujar_elemento();
 
 		}

@@ -18,7 +18,7 @@ public class Tablero implements Dibujable {
 		final int NUM_CASILLAS,NUM_BORDES,SEPARACION = 2,BORDE_x_CASILLA=3,BORDE_x_ACIERTO=2;
 		ListIterator<Comb_y_result> itComb; //Iterador para las combinaciones
 		
-		NUM_CASILLAS = cifrado.combinacion.length;
+		NUM_CASILLAS = cifrado.tamanio();
 		NUM_BORDES = 2*SEPARACION + NUM_CASILLAS * BORDE_x_CASILLA + NUM_CASILLAS * BORDE_x_ACIERTO;
 		
 		for (int i = 0; i < NUM_BORDES; i++) {
@@ -29,9 +29,10 @@ public class Tablero implements Dibujable {
 		
 		for (itComb = comb_y_resultados.listIterator(comb_y_resultados.size()); itComb.hasPrevious();) {
 			
-			Combinacion combinacion = itComb.previous();
+			Comb_y_result comb_y_resultado = itComb.previous();
 			
-			combinacion.dibujar_elemento();
+			comb_y_resultado.dibujar_elemento();
+			
 			System.out.printf("|");
 			if (itComb.hasPrevious()) {
 				for (int i = 0; i < (NUM_BORDES - SEPARACION - NUM_CASILLAS * BORDE_x_ACIERTO) - 1; i++) {
