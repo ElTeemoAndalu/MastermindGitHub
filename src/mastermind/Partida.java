@@ -5,23 +5,26 @@ public class Partida {
 	private Jugador jugador1, jugador2;
 	private static int num_partida = 0;
 	private Dificultad dificultad;
+	private int turnoPartida;
 
 	public Partida(Dificultad dificultad) {
 		this.dificultad = dificultad;
 		++num_partida;
-		
+		turnoPartida = 0;
+
 		if (dificultad == Dificultad.DIFICIL) {
 			jugador1 = new IA(dificultad);
 		} else {
 			jugador1 = new Usuario(dificultad);
 		}
-		
+
 		jugador2 = new IA(dificultad);
 	}
 
 	public Partida(Dificultad dificultad, boolean cifrando) {
 		this.dificultad = dificultad;
 		++num_partida;
+		turnoPartida = 0;
 		jugador1 = new Usuario(dificultad, cifrando);
 		jugador2 = new IA(dificultad, cifrando);
 
@@ -88,7 +91,7 @@ public class Partida {
 		boolean ganador = false, fila_valida = false;
 		int seleccion;
 
-		while (!ganador) {
+		while (!ganador && turnoPartida < dificultad.getIntentos()) {
 
 			if (jugador1.getTurno() == 0) {
 
@@ -121,22 +124,20 @@ public class Partida {
 			} else {
 
 				do {
-					((IA)jugador2).introducir_fila(((IA)jugador2).comb_random());
+					((IA) jugador2).introducir_fila(((IA) jugador2).comb_random());
 					jugador2.getTablero().dibujar_elemento();
 					jugador1.introducir_aciertos(jugador2.getTablero());
 				} while (!fila_valida);
-				
 
-				/*if (jugador1.getTurno() >= 1 && jugador2.getTablero().getComb_y_result().get(jugador2.getTablero().ultima_combinacion_y_result()).comprobar_respuesta()) {
-					ganador();
+				if (comprobar_ganador(jugador2.getTablero()) == 2) {
 					ganador = true;
+				}  else {
+					turnoPartida++;
 				}
-				
-				if (dificultad.getIntentos() + 1 == jugador2.getTurno()) {
-					perdedor();
-				}*/
+
 			}
 		}
+		mostrar_ganador(comprobar_ganador(jugador2.getTablero()));
 	}
 
 	public void partida_facil_descifrando() {
@@ -155,12 +156,26 @@ public class Partida {
 
 	}
 
-	public void ganador() {
-
+	// 1 -> Jugador1 gana | 2 -> Jugador2 gana
+	public int comprobar_ganador(Tablero tablero) {
+		int resultado = 0;
+		if(dificultad == Dificultad.FACIL) {
+			if (tablero.getComb_y_result().get(tablero.ultima_combinacion_y_result()).getCombinacion()
+					.equals(tablero.coger_cifrado())) {
+				resultado = 2;
+			} else if (turnoPartida + 1 > dificultad.getIntentos()) {
+				resultado = 1;
+			} 	
+		}
+		
+		return resultado;
 	}
-
-	public void perdedor() {
-
+	
+	public void mostrar_ganador(int ganador) {
+		System.out.println("Jugador " + ganador + " gana ＼（＾∀＾）メ（＾∀＾）ノ");
+		System.out.println("Pulse intro para continuar");
+		Teclado.leercadena();
+		new Mastermind().menu_principal();
 	}
 
 	// Getters

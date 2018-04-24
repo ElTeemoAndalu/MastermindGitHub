@@ -64,7 +64,8 @@ public class IA extends Jugador {
 		Combinacion combinacion = new Combinacion(tablero.numero_de_casillas());
 		Color color = null;
 		int i;
-
+		
+		// Devuelve colores del modo fácil
 		for (i = 0; i < tablero.numero_de_casillas(); i++) {
 
 			switch (rnd.nextInt(8)) {
@@ -90,7 +91,7 @@ public class IA extends Jugador {
 					color = Color.CELESTE;
 					break;
 				case 7:
-					color = Color.BLANCO;
+					color = Color.MORADO_CLARO;
 					break;
 				case 8:
 					color = Color.GRIS;

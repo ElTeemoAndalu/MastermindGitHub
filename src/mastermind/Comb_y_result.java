@@ -33,10 +33,10 @@ public class Comb_y_result extends Combinacion {
 		int i;
 
 		for (i = 0; i < cant_ind_Negros; i++) { // Coloca los indicadores negros en el resultado de la última combinación
-			resultados[i].setColor(Color.NEGRO);
+			resultados[i].setColor(Color.IND_NEGRO);
 		}
 		for (i = cant_ind_Negros; i < cant_ind_Negros + cant_ind_Blancos; i++) { // Coloca los indicadores blancos en el resultado de la última combinación
-			resultados[i].setColor(Color.BLANCO);
+			resultados[i].setColor(Color.IND_GRIS);
 		}
 		
 	}

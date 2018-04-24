@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Combinacion implements Dibujable, Cloneable {
 
 	protected Casilla[] combinacion;
-	
+
 	// Constructor
 	public Combinacion(int num_casillas) {
 		combinacion = new Casilla[num_casillas];
@@ -13,11 +13,11 @@ public class Combinacion implements Dibujable, Cloneable {
 			combinacion[i] = new Casilla();
 		}
 	}
+
 	// Getter
 	public Casilla[] getCombinacion() {
 		return combinacion;
 	}
-	
 
 	// Equals
 	public boolean equals(Object obj) {
@@ -27,9 +27,6 @@ public class Combinacion implements Dibujable, Cloneable {
 		}
 		return resultado;
 	}
-
-	
-
 
 	// Metodos aparte
 	@Override
@@ -41,36 +38,36 @@ public class Combinacion implements Dibujable, Cloneable {
 		System.out.printf("| ");
 
 	}
-	
+
 	public int tamanio() {
 		return combinacion.length;
 	}
-	
+
 	public boolean es_comb_llena() {
 		boolean esta_llena = false;
 		int cont = 0;
-		
+
 		for (int i = 0; i < combinacion.length; i++) {
 			if (combinacion[i] == null) {
 				cont++;
 			}
 		}
-		
-		if (cont==0) {
+
+		if (cont == 0) {
 			esta_llena = true;
 		}
-		
+
 		return esta_llena;
 	}
-	
-	public void cambiar_color_casilla(int posicion,Color color) {
+
+	public void cambiar_color_casilla(int posicion, Color color) {
 		combinacion[posicion].setColor(color);
 	}
-	
+
 	public boolean comprobar_colores_repes() {
 		boolean color_repetido = false;
-		int i,j;
-		
+		int i, j;
+
 		for (i = 0; i < combinacion.length; i++) {
 			for (j = i + 1; j < combinacion.length; j++) {
 				if (combinacion[i].equals(combinacion[j])) {
@@ -78,41 +75,47 @@ public class Combinacion implements Dibujable, Cloneable {
 				}
 			}
 		}
-		
+
 		return color_repetido;
 	}
-	
-	protected boolean comprobar_respuesta(Combinacion cifrado,int num_ind_Negros,int num_ind_Blancos) {
-		int j,ind_Negros,ind_Blancos;
+
+	protected boolean comprobar_respuesta(Combinacion cifrado, int num_ind_Negros, int num_ind_Blancos) {
+		int i, j, ind_Negros, ind_Blancos;
 		final int NUM_CASILLAS = combinacion.length;
-		boolean en_resultado[] = new boolean[NUM_CASILLAS],resultado = false;
-		
+		boolean en_resultado[] = new boolean[NUM_CASILLAS], resultado = false;
+
 		ind_Negros = ind_Blancos = 0;
-		
-		for (int i = 0; i < NUM_CASILLAS; i++) {
+
+		for (i = 0; i < en_resultado.length; i++) {
+			en_resultado[i] = false;
+		}
+
+		for (i = 0; i < NUM_CASILLAS; i++) {
+			if (combinacion[i].color.equals(cifrado.getCombinacion()[i].getColor())) {
+				ind_Negros++;
+				en_resultado[i] = true;
+			}
+		}
+
+		for (i = 0; i < NUM_CASILLAS; i++) {
+
 			for (j = 0; j < NUM_CASILLAS; j++) {
-				if (!en_resultado[i]) {
-					if (combinacion[i].color.equals(cifrado.getCombinacion()[j].getColor()) && i == j ) {
-						ind_Negros++;
-						en_resultado[j] = true;
-						j = NUM_CASILLAS;
-					} else if (combinacion[i].getColor().equals(cifrado.getCombinacion()[j].getColor())) {
+				if (!en_resultado[j]) {
+					if (combinacion[i].getColor().equals(cifrado.getCombinacion()[j].getColor())) {
 						ind_Blancos++;
 						en_resultado[j] = true;
-						j = NUM_CASILLAS;
-					} 
+					}
 				}
 			}
 		}
-		if(num_ind_Negros == ind_Negros && num_ind_Blancos == ind_Blancos) {
+		
+		if (num_ind_Negros == ind_Negros && num_ind_Blancos == ind_Blancos) {
 			resultado = true;
 		}
 		return resultado;
-		
+
 	}
-	
-	
-	
+
 	/*protected boolean comprobar_respuesta() {
 		int i,j,ind_Negros;
 		final int NUM_CASILLAS = cifrado.combinacion.length;

@@ -44,14 +44,14 @@ public class Usuario extends Jugador {
 					"Introduzca el color de la bola:(Introduzca 0 para volver al menu de partida)\n1.-%s  %s  2.-%s  %2$s\n3.-%s  %2$s  4.-%s  %2$s\n5.-%s  %2$s  6.-%s  %2$s\n7.-%s  %2$s  8.-%s  %2$s\n",
 					Color.NEGRO.getCod_Color(), Color.RESETEAR.getCod_Color(), Color.ROJO.getCod_Color(), Color.VERDE.getCod_Color(),
 					Color.AMARILLO.getCod_Color(), Color.AZUL.getCod_Color(), Color.MORADO.getCod_Color(), Color.CELESTE.getCod_Color(),
-					Color.BLANCO.getCod_Color());
+					Color.MORADO_CLARO.getCod_Color());
 		} else {
 			num_colores = Dificultad.DIFICIL.getColores();
 			System.out.printf(
 					"Introduzca el color de la bola:(Introduzca 0 para volver al menu de partida)\n1.-%s  %s  2.-%s  %2$s\n3.-%s  %2$s  4.-%s  %2$s\n5.-%s  %2$s  6.-%s  %2$s\n7.-%s  %2$s  8.-%s  %2$s\n9.-%s  %2$s 10.-%s  %2$s",
 					Color.NEGRO.getCod_Color(), Color.RESETEAR.getCod_Color(), Color.ROJO.getCod_Color(), Color.VERDE.getCod_Color(),
 					Color.AMARILLO.getCod_Color(), Color.AZUL.getCod_Color(), Color.MORADO.getCod_Color(), Color.CELESTE.getCod_Color(),
-					Color.BLANCO.getCod_Color(), Color.GRIS.getCod_Color(), Color.VERDE_CLARO.getCod_Color());
+					Color.MORADO_CLARO.getCod_Color(), Color.GRIS.getCod_Color(), Color.VERDE_CLARO.getCod_Color());
 		}
 		switch (Teclado.lecturaconlimites(0, num_colores, Teclado.LimiteInfySup.INCLUIDOS, "")) {
 			case 1:
@@ -76,7 +76,7 @@ public class Usuario extends Jugador {
 				tablero.getCifrado().cambiar_color_casilla(seleccion, Color.CELESTE);
 				break;
 			case 8:
-				tablero.getCifrado().cambiar_color_casilla(seleccion, Color.BLANCO);
+				tablero.getCifrado().cambiar_color_casilla(seleccion, Color.MORADO_CLARO);
 				break;
 			case 9:
 				tablero.getCifrado().cambiar_color_casilla(seleccion, Color.GRIS);
