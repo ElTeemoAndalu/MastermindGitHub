@@ -9,21 +9,21 @@ public class Usuario extends Jugador {
 	}
 
 	protected Usuario(Dificultad dificultad, boolean cifrando) {
-		if (!cifrando) {
+		if (dificultad == Dificultad.FACIL && !cifrando) {
 			tablero = new Tablero(dificultad);
 		}
-		turno = 0;
+		
+		if (!cifrando) {
+			turno = 1;
+		}else {
+			turno = 0;
+		}
+
 		filaCreada = false;
 	}
 
 	@Override
-	public void introducir_bola() {
-		
-
-	}
-
-	@Override
-	protected void introducir_cifrado(Tablero tablero) {
+	protected void introducir_bola_cifrado(Tablero tablero) {
 		final int NUM_CASILLAS_DIF_MEDIA = 5;
 		int seleccion, num_colores;
 

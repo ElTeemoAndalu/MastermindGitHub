@@ -59,6 +59,51 @@ public class Tablero implements Dibujable {
 		System.out.println("\n\n");
 	}
 	
+	public void dibujar_con_cifr_oculto() {
+		final int NUM_CASILLAS,NUM_BORDES,SEPARACION = 2,BORDE_x_CASILLA=3,BORDE_x_ACIERTO=2;
+		ListIterator<Comb_y_result> itComb; //Iterador para las combinaciones
+		
+		NUM_CASILLAS = cifrado.tamanio();
+		NUM_BORDES = 2*SEPARACION + NUM_CASILLAS * BORDE_x_CASILLA + NUM_CASILLAS * BORDE_x_ACIERTO;
+		
+		for (int i = 0; i < NUM_BORDES; i++) {
+			System.out.printf("_");//Tantos _ como caracteres ocupe el ancho del tablero (cada casilla son tres _ y cada acierto dos, el borde izquierdo son otros dos y las separacion dos mas
+		}
+		
+		System.out.println();
+		
+		for (itComb = comb_y_resultados.listIterator(comb_y_resultados.size()); itComb.hasPrevious();) {
+			
+			Comb_y_result comb_y_resultado = itComb.previous();
+			
+			comb_y_resultado.dibujar_elemento();
+			
+			System.out.printf("|");
+			if (itComb.hasPrevious()) {
+				for (int i = 0; i < (NUM_BORDES - SEPARACION - NUM_CASILLAS * BORDE_x_ACIERTO) - 1; i++) {
+					System.out.printf(" "); //Numero de espacios desde el borde izquierdo hasta la primera separación
+				}
+				System.out.printf("|");
+				for (int i = 0; i < (SEPARACION + NUM_CASILLAS * BORDE_x_ACIERTO) - 1; i++) {
+					System.out.printf(" "); //Numero de espacios desde la separación hasta el borde derecho
+				}
+				System.out.println("|");
+			}else {
+				for (int i = 0; i < (NUM_BORDES - SEPARACION - NUM_CASILLAS * BORDE_x_ACIERTO) - 1; i++) {
+					System.out.printf("_"); //Numero de guiones bajos(borde inferior) desde el borde izquierdo hasta la primera separación
+				}
+				System.out.printf("|");
+				for (int i = 0; i < (SEPARACION + NUM_CASILLAS * BORDE_x_ACIERTO) - 1; i++) {
+					System.out.printf("_"); //Numero de guiones bajos(borde inferior) desde la separación hasta el borde derecho
+				}
+				System.out.println("|");
+			}
+		}
+
+		cifrado.dibujar_elemento_oculto();;
+		System.out.println("\n\n");
+	}
+	
 	public void dibujar_comb_actual() {
 		comb_y_resultados.get(ultima_combinacion_y_result()).dibujar_solo_combinacion();
 	}

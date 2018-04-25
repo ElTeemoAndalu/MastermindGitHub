@@ -10,7 +10,7 @@ public abstract class Jugador {
 
 	
 	protected abstract void introducir_aciertos(Tablero tablero);
-	protected abstract void introducir_cifrado(Tablero tablero);
+	protected abstract void introducir_bola_cifrado(Tablero tablero);
 	
 	protected void introducir_bola() {
 		final int NUM_CASILLAS_DIF_MEDIA = 5;

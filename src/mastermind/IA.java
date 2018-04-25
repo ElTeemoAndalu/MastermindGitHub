@@ -14,14 +14,14 @@ public class IA extends Jugador {
 	}
 
 	protected IA(Dificultad dificultad, boolean cifrando) {
-		if (dificultad == Dificultad.FACIL) {
+		if (dificultad == Dificultad.FACIL && cifrando) {
 			tablero = new Tablero(dificultad);
 		}
 		
-		if (!cifrando) {
-			turno = 0;
-		}else {
+		if (cifrando) {
 			turno = 1;
+		}else {
+			turno = 0;
 		}
 		
 		filaCreada = false;
@@ -59,7 +59,7 @@ public class IA extends Jugador {
 
 	}
 
-	public Combinacion comb_random() {
+	public Combinacion comb_random(Tablero tablero) {
 		Random rnd = new Random();
 		Combinacion combinacion = new Combinacion(tablero.numero_de_casillas());
 		Color color = null;
@@ -108,35 +108,16 @@ public class IA extends Jugador {
 
 	@Override
 	protected void introducir_aciertos(Tablero tablero) {
-		int i, j, ind_Negros, ind_Blancos;
-		final int num_casillas = tablero.numero_de_casillas();
-		ind_Negros = ind_Blancos = 0;
-		boolean en_resultado[] = new boolean[num_casillas];
+		int ind_Negr_Blan[];
+		
+		ind_Negr_Blan = tablero.getComb_y_result().get(tablero.ultima_combinacion_y_result()).calcular_respuesta(tablero.getCifrado());
 
-		for (i = 0; i < num_casillas; i++) {
-			for (j = 0; i < num_casillas; i++) {
-				if (!en_resultado[j]) {
-					if (tablero.getComb_y_result().get(tablero.getComb_y_result().size() - 1).getCombinacion()[i]
-							.getColor().equals(tablero.getCifrado().getCombinacion()[j].getColor()) && i == j) {
-						ind_Negros++;
-						en_resultado[j] = true;
-						j = num_casillas;
-					} else if (tablero.getComb_y_result().get(tablero.getComb_y_result().size() - 1).getCombinacion()[i]
-							.getColor().equals(tablero.getCifrado().getCombinacion()[j].getColor())) {
-						ind_Blancos++;
-						en_resultado[j] = true;
-						j = num_casillas;
-					}
-				}
-			}
-		}
-
-		tablero.getComb_y_result().get(tablero.ultima_combinacion_y_result()).colocar_respuesta(ind_Negros,
-				ind_Blancos);
+		tablero.getComb_y_result().get(tablero.ultima_combinacion_y_result()).colocar_respuesta(ind_Negr_Blan[0],
+				ind_Negr_Blan[1]);
 	}
 
 	@Override
-	protected void introducir_cifrado(Tablero tablero) {
+	protected void introducir_bola_cifrado(Tablero tablero) {
 	}
 
 }
