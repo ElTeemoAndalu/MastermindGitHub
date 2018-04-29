@@ -140,7 +140,5 @@ public class Tablero implements Dibujable {
 	public ArrayList<Comb_y_result> getComb_y_result(){
 		return comb_y_resultados;
 	}
-	
-	
 
 }

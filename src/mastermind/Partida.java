@@ -1,5 +1,7 @@
 package mastermind;
 
+import java.util.Arrays;
+
 public class Partida {
 
 	private Jugador jugador1, jugador2;
@@ -30,24 +32,6 @@ public class Partida {
 
 	}
 
-	public int opciones_jugador(Tablero tablero) {
-
-		int seleccion = 0;
-		
-		System.out.println("1.- Introducir bola");
-		System.out.println("2.- Confirmar fila");
-
-		if (dificultad == Dificultad.FACIL) {
-			System.out.println("3.- Salir al menu principal\n");
-		} else {
-			System.out.println("3.- Rendirse\n");
-		}
-
-		seleccion = Teclado.lecturaconlimites(1, 3, Teclado.LimiteInfySup.INCLUIDOS, "");
-
-		return seleccion;
-	}
-
 	public void partida_jugador(boolean cifrando) {
 
 	}
@@ -55,58 +39,32 @@ public class Partida {
 	// Metodos que dictaminan como funcionan las partidas
 	public void partida_facil_cifrando() {
 		boolean ganador = false, fila_valida = false;
-		int seleccion;
 
 		while (!ganador && turnoPartida < dificultad.getIntentos()) {
 
 			if (jugador1.getTurno() == 0) {
 
-				if (!jugador2.getTablero().getCifrado().es_comb_llena()) {
-					do {
-						seleccion = opciones_jugador(jugador2.getTablero());
-						if (seleccion == 1) {
-							jugador1.introducir_bola_cifrado(jugador2.getTablero());
-						} else {
-							new Mastermind().menu_principal(); // CAMBIAR ESTO
-						}
-					} while (!jugador1.getTablero().getCifrado().es_comb_llena());
-
-				} else {
-					do {
-						jugador2.getTablero().dibujar_elemento();
-						seleccion = opciones_jugador(jugador2.getTablero());
-						if (seleccion == 1) {
-							jugador1.introducir_bola_cifrado(jugador2.getTablero());
-						} else if (seleccion == 2) {
-							fila_valida = jugador1.confirmar_fila(jugador2.getTablero());
-							if (!fila_valida) {
-								System.out.println("La fila no es valida.");
-							}
-						} else {
-							
-							new Mastermind().menu_principal();// CAMBIAR ESTO
-						}
-						
-					} while (!fila_valida);
-				}
+				((Usuario) jugador1).introducir_cifrado(jugador2.tablero);
 
 			} else {
 
 				do {
+					//CAMBIAR ESTA LINEA CUANDO IA ESTE TERMINADA
 					((IA) jugador2).introducir_fila(((IA) jugador2).comb_random(jugador2.getTablero()));
 					jugador2.getTablero().dibujar_elemento();
 					jugador1.introducir_aciertos(jugador2.getTablero());
 				} while (!fila_valida);
 
-				if (comprobar_ganador(jugador2.getTablero()) == 2) {
+				if (comprobar_ganador(jugador2.getTablero(),true) == 2) {
 					ganador = true;
+					mostrar_ganador(comprobar_ganador(jugador2.getTablero(),true));
 				} else {
 					turnoPartida++;
 				}
 
 			}
 		}
-		mostrar_ganador(comprobar_ganador(jugador2.getTablero()));
+		mostrar_ganador(comprobar_ganador(jugador2.getTablero(),true));
 	}
 
 	public void partida_facil_descifrando() {
@@ -125,25 +83,62 @@ public class Partida {
 
 				do {
 					jugador1.getTablero().dibujar_con_cifr_oculto();
-					seleccion = opciones_jugador(jugador1.getTablero());
+					seleccion = ((Usuario) jugador1).opciones_jugador();
 					if (seleccion == 1) {
 						jugador1.introducir_bola();
 					} else if (seleccion == 2) {
 						fila_valida = jugador1.confirmar_fila(jugador1.getTablero());
 						((IA) jugador2).introducir_aciertos(jugador1.getTablero());
-					} else {
-						new Mastermind().menu_principal();// CAMBIAR ESTO
-					}
-					if (!fila_valida) {
-						System.out.println("La fila no es valida.");
 					}
 				} while (!fila_valida);
+				
+				if (comprobar_ganador(jugador1.getTablero(),false) == 1) {
+					ganador = true;
+					mostrar_ganador(comprobar_ganador(jugador1.getTablero(),false));
+				} else {
+					turnoPartida++;
+				}
 				
 			}
 		}
 	}
 
 	public void partida_medio() {
+		
+		int seleccion;
+		boolean fila_valida, ganador;
+
+		fila_valida = ganador = false;
+
+		while (!ganador && turnoPartida < dificultad.getIntentos()) {
+
+			if (jugador2.getTurno() == 0) {
+				((IA) jugador2).introducir_cifrado(((IA) jugador2).comb_random(jugador1.getTablero()),
+						jugador1.getTablero());
+				((Usuario) jugador1).introducir_cifrado(jugador2.tablero);
+
+			} else {
+
+				do {
+					jugador1.getTablero().dibujar_con_cifr_oculto();
+					seleccion = ((Usuario) jugador1).opciones_jugador();
+					if (seleccion == 1) {
+						jugador1.introducir_bola();
+					} else if (seleccion == 2) {
+						fila_valida = jugador1.confirmar_fila(jugador1.getTablero());
+						((IA) jugador2).introducir_aciertos(jugador1.getTablero());
+					}
+				} while (!fila_valida);
+				
+				if (comprobar_ganador(jugador1.getTablero(),false) == 1) {
+					ganador = true;
+					mostrar_ganador(comprobar_ganador(jugador1.getTablero(),false));
+				} else {
+					turnoPartida++;
+				}
+				
+			}
+		}
 
 	}
 
@@ -151,15 +146,22 @@ public class Partida {
 
 	}
 
-	// 1 -> Jugador1 gana | 2 -> Jugador2 gana
-	public int comprobar_ganador(Tablero tablero) {
+	public int comprobar_ganador(Tablero tablero,boolean cifrando) {
 		int resultado = 0;
-		if (dificultad == Dificultad.FACIL) {
-			if (tablero.getComb_y_result().get(tablero.ultima_combinacion_y_result()).getCombinacion()
-					.equals(tablero.coger_cifrado())) {
-				resultado = 2;
-			} else if (turnoPartida + 1 > dificultad.getIntentos()) {
-				resultado = 1;
+		
+		if(dificultad == Dificultad.FACIL) {
+			if (Arrays.equals(tablero.coger_cifrado(), tablero.coger_ultima_combinacion())) {
+				if (cifrando) {
+					resultado = 2;
+				}else {
+					resultado = 1;
+				}
+			} else if ((turnoPartida + 1) > dificultad.getIntentos()) {
+				if (cifrando) {
+					resultado = 1;
+				}else {
+					resultado = 2;
+				}
 			}
 		}
 
@@ -170,7 +172,6 @@ public class Partida {
 		System.out.println("Jugador " + ganador + " gana ＼（＾∀＾）メ（＾∀＾）ノ");
 		System.out.println("Pulse intro para continuar");
 		Teclado.leercadena();
-		new Mastermind().menu_principal();
 	}
 
 	// Getters

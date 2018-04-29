@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class IA extends Jugador {
 	
-	private HashMap<Combinacion, Integer> tableroAux;
+	private HashMap<Combinacion, Integer[]> tableroAux;
 
 	protected IA(Dificultad dificultad) {
 		tablero = new Tablero(dificultad);

@@ -25,7 +25,9 @@ public abstract class Jugador {
 
 		System.out.println(
 				"¿En que posición desea introducir la bola? (Introduzca 0 para volver a la pantalla anterior):\n");
-
+		
+		System.out.println("  1  2  3  4");
+		
 		tablero.dibujar_comb_actual();
 
 		seleccion = Teclado.lecturaconlimites(0, tablero.numero_de_casillas(), Teclado.LimiteInfySup.INCLUIDOS, "") - 1;
