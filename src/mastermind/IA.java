@@ -65,10 +65,11 @@ public class IA extends Jugador {
 		Color color = null;
 		int i;
 		
-		// Devuelve colores del modo fácil
-		for (i = 0; i < tablero.numero_de_casillas(); i++) {
+		do {
+			// Devuelve colores del modo fácil
+			for (i = 0; i < tablero.numero_de_casillas(); i++) {
 
-			switch (rnd.nextInt(8)) {
+				switch (rnd.nextInt(8)) {
 				case 0:
 					color = Color.NEGRO;
 					break;
@@ -98,11 +99,11 @@ public class IA extends Jugador {
 					break;
 				default:
 					break;
-			}
+				}
 
-			combinacion.cambiar_color_casilla(i, color);
-		}
-
+				combinacion.cambiar_color_casilla(i, color);
+			} 
+		} while (combinacion.comprobar_colores_repes());
 		return combinacion;
 	}
 
@@ -115,9 +116,12 @@ public class IA extends Jugador {
 		tablero.getComb_y_result().get(tablero.ultima_combinacion_y_result()).colocar_respuesta(ind_Negr_Blan[0],
 				ind_Negr_Blan[1]);
 	}
-
-	@Override
-	protected void introducir_bola_cifrado(Tablero tablero) {
+	
+	public Combinacion analisis_intento() {
+		Combinacion nueva_comb = new Combinacion(tablero.numero_de_casillas());
+		
+		return nueva_comb;
 	}
+
 
 }
