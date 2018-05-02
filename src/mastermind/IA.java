@@ -1,16 +1,18 @@
 package mastermind;
 
-import java.util.HashMap;
+
 import java.util.Random;
+import java.util.TreeMap;
 
 public class IA extends Jugador {
 	
-	private HashMap<Combinacion, Integer[]> tableroAux;
+	private TreeMap<Byte,Combinacion> tableroAux;
 
 	protected IA(Dificultad dificultad) {
 		tablero = new Tablero(dificultad);
 		turno = 0;
 		filaCreada = false;
+		tableroAux = new TreeMap<>();
 	}
 
 	protected IA(Dificultad dificultad, boolean cifrando) {
@@ -113,14 +115,15 @@ public class IA extends Jugador {
 		
 		ind_Negr_Blan = tablero.getComb_y_result().get(tablero.ultima_combinacion_y_result()).calcular_respuesta(tablero.getCifrado());
 
-		tablero.getComb_y_result().get(tablero.ultima_combinacion_y_result()).colocar_respuesta(ind_Negr_Blan[0],
-				ind_Negr_Blan[1]);
+		tablero.getComb_y_result().get(tablero.ultima_combinacion_y_result()).colocar_respuesta(ind_Negr_Blan[0],ind_Negr_Blan[1]);
 	}
 	
 	public Combinacion analisis_intento() {
-		Combinacion nueva_comb = new Combinacion(tablero.numero_de_casillas());
+		Combinacion comb_resultado = new Combinacion(tablero.numero_de_casillas());
+		Random rnd = new Random();
 		
-		return nueva_comb;
+		
+		return comb_resultado;
 	}
 
 
