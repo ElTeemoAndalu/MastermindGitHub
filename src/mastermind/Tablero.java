@@ -129,6 +129,26 @@ public class Tablero implements Dibujable {
 		return comb_y_resultados.get(ultima_combinacion_y_result()).getCombinacion();
 	}
 	
+	public Comb_y_result coger_ultima_combinacion_y_result() {
+		return comb_y_resultados.get(ultima_combinacion_y_result());
+	}
+	
+	public Byte calcular_resultado(int posicion) {
+		int ind_negros,ind_grises;
+		
+		ind_negros = ind_grises = 0;
+		
+		for (int i = 0; i < comb_y_resultados.get(posicion).getResultados().length; i++) {
+			if(comb_y_resultados.get(posicion).getResultados()[i].getColor()==Color.IND_NEGRO) {
+				ind_negros++;
+			}else if(comb_y_resultados.get(posicion).getResultados()[i].getColor()==Color.IND_GRIS) {
+				ind_grises++;
+			}
+		}
+		
+		return (byte)((ind_negros * 10) + ind_grises);
+	}
+	
 	public Combinacion getCifrado() {
 		return cifrado;
 	}
