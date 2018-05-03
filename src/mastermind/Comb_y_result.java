@@ -56,9 +56,9 @@ public class Comb_y_result extends Combinacion {
 				ind_Grises_j1++;
 			}
 
-			if (comb_y_result_rival.getResultado()[i].getColor() == Color.IND_NEGRO) {
+			if (comb_y_result_rival.getResultados()[i].getColor() == Color.IND_NEGRO) {
 				ind_Negros_j2++;
-			} else if (comb_y_result_rival.getResultado()[i].getColor() == Color.IND_GRIS) {
+			} else if (comb_y_result_rival.getResultados()[i].getColor() == Color.IND_GRIS) {
 				ind_Grises_j2++;
 			}
 		}
@@ -77,9 +77,7 @@ public class Comb_y_result extends Combinacion {
 		return resultado;
 	}
 
-	public Indicador[] getResultados() {
-		return resultados;
-	}
+	
 
 	// Equals
 	public boolean equals(Object obj) {
@@ -103,7 +101,7 @@ public class Comb_y_result extends Combinacion {
 	}
 
 	// Getter
-	public Indicador[] getResultado() {
+	public Indicador[] getResultados() {
 		return resultados;
 	}
 
