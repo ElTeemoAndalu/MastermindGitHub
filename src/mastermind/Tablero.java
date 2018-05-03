@@ -128,10 +128,6 @@ public class Tablero implements Dibujable {
 	public Casilla[] coger_ultima_combinacion() {
 		return comb_y_resultados.get(ultima_combinacion_y_result()).getCombinacion();
 	}
-
-	public Casilla[] coger_cifrado() {
-		return cifrado.getCombinacion();
-	}
 	
 	public Combinacion getCifrado() {
 		return cifrado;

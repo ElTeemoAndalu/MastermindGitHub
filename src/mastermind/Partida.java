@@ -81,7 +81,7 @@ public class Partida {
 					jugador1.getTablero().dibujar_con_cifr_oculto();
 					seleccion = ((Usuario) jugador1).opciones_jugador_descifrando();
 					if (seleccion == 1) {
-						jugador1.introducir_bola();
+						((Usuario)jugador1).introducir_bola();
 					} else if (seleccion == 2) {
 						fila_valida = jugador1.confirmar_fila(jugador1.getTablero());
 						((IA) jugador2).introducir_aciertos(jugador1.getTablero());
@@ -125,7 +125,7 @@ public class Partida {
 					seleccion = ((Usuario) jugador1).opciones_jugador_descifrando();
 
 					if (seleccion == 1) {
-						jugador1.introducir_bola();
+						((Usuario)jugador1).introducir_bola();
 					} else if (seleccion == 2) {
 						fila_valida = jugador1.confirmar_fila(jugador1.getTablero());
 						((IA) jugador2).introducir_aciertos(jugador1.getTablero());
@@ -160,14 +160,14 @@ public class Partida {
 		int resultado = 0;
 
 		if (cifrando) {
-			if (Arrays.equals(jugador2.getTablero().coger_cifrado(),
+			if (Arrays.equals(jugador2.getTablero().getCifrado().getCombinacion(),
 					jugador2.getTablero().coger_ultima_combinacion())) {
 				resultado = 2;
 			} else if ((turnoPartida + 1) > dificultad.getIntentos()) {
 				resultado = 1;
 			}
 		} else {
-			if (Arrays.equals(jugador1.getTablero().coger_cifrado(),
+			if (Arrays.equals(jugador1.getTablero().getCifrado().getCombinacion(),
 					jugador1.getTablero().coger_ultima_combinacion())) {
 				resultado = 1;
 			} else if ((turnoPartida + 1) > dificultad.getIntentos()) {
@@ -181,9 +181,9 @@ public class Partida {
 	public int comprobar_ganador_medio_dif() {
 		int resultado = 0;
 
-		if (Arrays.equals(jugador1.getTablero().coger_cifrado(), jugador1.getTablero().coger_ultima_combinacion())) {
+		if (Arrays.equals(jugador1.getTablero().getCifrado().getCombinacion(), jugador1.getTablero().coger_ultima_combinacion())) {
 			resultado = 1;
-		} else if (Arrays.equals(jugador2.getTablero().coger_cifrado(),
+		} else if (Arrays.equals(jugador2.getTablero().getCifrado().getCombinacion(),
 				jugador2.getTablero().coger_ultima_combinacion())) {
 			resultado = 1;
 		} else if ((turnoPartida + 1) > dificultad.getIntentos()) {
