@@ -33,7 +33,7 @@ public enum Color {
 	private String cod_color;
 	/**
 	 * Construye un color con el codigo del color que se le pasa.
-	 * @param El codigo del color.
+	 * @param cod_color		El codigo del color.
 	 */
 	private Color(String cod_color) {
 		this.cod_color = cod_color;

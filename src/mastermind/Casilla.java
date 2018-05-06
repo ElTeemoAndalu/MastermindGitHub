@@ -55,7 +55,7 @@ public class Casilla implements Dibujable,Cloneable {
 	// Equals
 	/**
 	 * Compara este color con el objeto que se le pasa.
-	 * @param El objeto con el que se va a comparar.
+	 * @param obj 	El objeto con el que se va a comparar.
 	 * @return true: si son iguales.
 	 * 		   false: si son diferentes.
 	 */

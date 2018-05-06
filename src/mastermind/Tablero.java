@@ -1,7 +1,7 @@
 package mastermind;
 
 /**
- * Esta clase almacela las combinaciones y resultados ademas del cifrado que forma un tablero, y permite dibujarlo de varias formas además de ser modificado.
+ * Esta clase almacena las combinaciones y resultados ademas del cifrado que forma un tablero, y permite dibujarlo de varias formas además de ser modificado.
  * 
  * 
  * 
@@ -30,8 +30,9 @@ public class Tablero implements TableroDibujable {
 	
 	/**
 	 * Construye un nuevo objeto con el cifrado por defecto (todas las casillas en negro) y con la lista de combinaciones y resultados vacia.
-	 * @param numero numero de casillas de la combinación que es igual que el de los indicadores, que viene determinado por la dificultad
-	 * @see Combinacion, Comb_y_result
+	 * @param dificultad 	dificultad con el numero de casillas deseado numero de casillas de la combinación que es igual que el de los indicadores
+	 * @see Combinacion
+	 * @see Comb_y_result
 	 */
 	public Tablero(Dificultad dificultad) {
 		cifrado = new Combinacion(dificultad.casillas); // Fila del cifrado
@@ -144,7 +145,7 @@ public class Tablero implements TableroDibujable {
 	
 	/**
 	 * Dibuja el tablero actual y el que se le pasa, normalmente el del rival, uno al lado del otro.
-	 * @param Tablero del rival.
+	 * @param tableroRival Tablero del rival.
 	 */
 	public void dibujar_tableros_lado_a_lado(Tablero tableroRival) {
 		final int SEPARACION_TABLEROS = 13,NUM_ESPACIOS, NUM_CASILLAS, NUM_BORDES, SEPARACION = 2, BORDE_x_CASILLA = 3, BORDE_x_ACIERTO = 2;
@@ -333,7 +334,7 @@ public class Tablero implements TableroDibujable {
 	
 	/**
 	 *	Devuelve un número correpondiente al valor del resultado de una combinacion, calculo = indicadores negros x 10 + indicadores grises.
-	 * @param indice de la combinacion de la que se quiere calcular el resultado
+	 * @param posicion indice de la combinacion de la que se quiere calcular el resultado
 	 * @return Numero que representa el valor de una combinacion
 	 */
 	public Byte calcular_resultado(int posicion) {

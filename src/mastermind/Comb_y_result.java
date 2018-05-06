@@ -23,7 +23,7 @@ public class Comb_y_result extends Combinacion {
 	
 	/**
 	 * Construye un nuevo objeto con todos las posiciones con los indicadores por defecto.
-	 * @param numero numero de casillas de la combinación que es igual que el de los indicadores, que viene determinado por la dificultad
+	 * @param num_casillas numero de casillas de la combinación que es igual que el de los indicadores, que viene determinado por la dificultad
 	 * @see Indicador , Casilla
 	 */
 	public Comb_y_result(int num_casillas) {
@@ -57,7 +57,8 @@ public class Comb_y_result extends Combinacion {
 	
 	/**
 	 * Coloca los indicadores negros y grises según los numeros que recibe.
-	 * @param cantidad de indicadores negros (mismo color y posicion) y cantidad de indicadores grises (solo mismo color)
+	 * @param cant_ind_Negros cantidad de indicadores negros (mismo color y posicion)
+	 * @param cant_ind_Grises cantidad de indicadores grises (solo mismo color)
 	 */
 	protected void colocar_respuesta(int cant_ind_Negros, int cant_ind_Grises) {
 		int i;
@@ -76,7 +77,7 @@ public class Comb_y_result extends Combinacion {
 	
 	/**
 	 * Compara los resultados(indicadores negros y grises) de esta combinacion y la que se le pasa.
-	 * @param Objeto de tipo comb_y_result del rival.
+	 * @param comb_y_result_rival		Objeto de tipo comb_y_result del rival.
 	 * @return 1: si el esta combinacion es mejor que la del rival 
 	 * 		   2: si la combinacion del rival es mejor
 	 * 		   0: si son iguales
@@ -119,7 +120,7 @@ public class Comb_y_result extends Combinacion {
 	// Equals
 	/**
 	 * Compara este combinacion y su resultado con el objeto que se le pasa.
-	 * @param El objeto con el que se va a comparar.
+	 * @param obj El objeto con el que se va a comparar.
 	 * @return true: si son iguales.
 	 * 		   false: si son diferentes.
 	 */

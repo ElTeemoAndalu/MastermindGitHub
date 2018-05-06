@@ -44,7 +44,7 @@ public class Combinacion implements CombinacionDibujable, Cloneable {
 	// Equals
 	/**
 	 * Compara esta combinacion con el objeto que se le pasa.
-	 * @param El objeto con el que se va a comparar.
+	 * @param obj El objeto con el que se va a comparar.
 	 * @return true: si son iguales.
 	 * 		   false: si son diferentes.
 	 */
@@ -92,7 +92,8 @@ public class Combinacion implements CombinacionDibujable, Cloneable {
 	
 	/**
 	 * Cambia el color de una de las casillas de esta combinación según el color y la posición que reciba.
-	 * @param El numero que indica la posicion y el color que se pondra en la casilla de esa posicion
+	 * @param posicion El numero que indica la posicion 
+	 * @param color El color que se pondra en la casilla de esa posicion
 	 * @see Casilla
 	 */
 	public void cambiar_color_casilla(int posicion, Color color) {
@@ -122,7 +123,9 @@ public class Combinacion implements CombinacionDibujable, Cloneable {
 
 	/**
 	 * Comprueba si los indicadores que ha introducido el usuario son correctos, corresponden con lo que hay en el cifrado.
-	 * @param La combinacion que actua como cifrado y que se usara para comparar colores, los indicadores negros(mismo color y posicion) y los indicadores grises (solo mismo color)
+	 * @param cifrado La combinacion que actua como cifrado
+	 * @param num_ind_Negros	Los indicadores negros(mismo color y posicion)
+	 * @param num_ind_Grises	Los indicadores grises (solo mismo color)
 	 * @return true: si ha introducido bien los indicadores
 	 * 		   false: si los ha introducido mal
 	 */
@@ -166,7 +169,7 @@ public class Combinacion implements CombinacionDibujable, Cloneable {
 	
 	/**
 	 * Devuelve la cantidad de indicadores negros y grises que daría como resultado esta combinacion.
-	 * @param Combinacion que actua como cifrado y que se usara para comparar colores.
+	 * @param cifrado	Combinacion que actua como cifrado y que se usara para comparar colores.
 	 * @return Array de dos numeros que contiene tras los indicadores negros en la primera posicion y los grises en la segunda posicion.
 	 * @see Casilla
 	 */

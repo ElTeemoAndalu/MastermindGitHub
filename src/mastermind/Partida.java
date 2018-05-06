@@ -1,5 +1,16 @@
 package mastermind;
 
+/**
+ * Esta clase almacena a los jugadores y la dificultad y determina el flujo de las partidas segun la dificultad,
+ * 
+ * 
+ * 
+ * @author Nicolas Navas Gomez
+ * @version 1.0
+ * @since 1.0
+ *
+ */
+
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 

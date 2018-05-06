@@ -20,7 +20,7 @@ public interface TableroDibujable extends Dibujable {
 	
 	/**
 	 * Dibuja los tableros de los dos jugadores uno al lado del otro.
-	 * @param Tablero del rival.
+	 * @param tablero Tablero del rival.
 	 */
 	public void dibujar_tableros_lado_a_lado(Tablero tablero);
 	
