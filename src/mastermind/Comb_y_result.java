@@ -1,13 +1,31 @@
 package mastermind;
 
+/**
+ * Esta además de una combinación, su resultado, que es un conjunto de objetos tipo Indicador y puede hacer comprobaciones y calculos de sobre esta además de dibujarla.
+ * 
+ * 
+ * 
+ * @author Nicolas Navas Gomez
+ * @version 1.0
+ * @since 1.0
+ *
+ */
 
 
 import java.util.Arrays;
 
 public class Comb_y_result extends Combinacion {
-
+	/**
+	 * Almacena un array de Indicador.
+	 * @see Indicador
+	 */
 	private Indicador resultados[];
-
+	
+	/**
+	 * Construye un nuevo objeto con todos las posiciones con los indicadores por defecto.
+	 * @param numero numero de casillas de la combinación que es igual que el de los indicadores, que viene determinado por la dificultad
+	 * @see Indicador , Casilla
+	 */
 	public Comb_y_result(int num_casillas) {
 		super(num_casillas);
 		resultados = new Indicador[num_casillas];// El numero de casillas es igual que el numero de indicadores
@@ -17,6 +35,9 @@ public class Comb_y_result extends Combinacion {
 	}
 
 	// Metodo para dibujar la combinacion y su resultado
+	/**
+	 * Dibuja la combinación y el resultado.
+	 */
 	public void dibujar_elemento() {
 		super.dibujar_elemento();
 		for (int i = 0; i < tamanio(); i++) {
@@ -26,11 +47,18 @@ public class Comb_y_result extends Combinacion {
 		System.out.printf("|");
 
 	}
-
+	
+	/**
+	 * Dibuja solo la combinacion.
+	 */
 	public void dibujar_solo_combinacion() {
 		super.dibujar_elemento();
 	}
-
+	
+	/**
+	 * Coloca los indicadores negros y grises según los numeros que recibe.
+	 * @param cantidad de indicadores negros (mismo color y posicion) y cantidad de indicadores grises (solo mismo color)
+	 */
 	protected void colocar_respuesta(int cant_ind_Negros, int cant_ind_Grises) {
 		int i;
 
@@ -45,7 +73,14 @@ public class Comb_y_result extends Combinacion {
 		}
 
 	}
-
+	
+	/**
+	 * Compara los resultados(indicadores negros y grises) de esta combinacion y la que se le pasa.
+	 * @param Objeto de tipo comb_y_result del rival.
+	 * @return 1: si el esta combinacion es mejor que la del rival 
+	 * 		   2: si la combinacion del rival es mejor
+	 * 		   0: si son iguales
+	 */
 	protected int comparar_respuestas(Comb_y_result comb_y_result_rival) {
 		int ind_Negros_j1, ind_Negros_j2, ind_Grises_j1, ind_Grises_j2,resultado;
 		
@@ -82,6 +117,12 @@ public class Comb_y_result extends Combinacion {
 	
 
 	// Equals
+	/**
+	 * Compara este combinacion y su resultado con el objeto que se le pasa.
+	 * @param El objeto con el que se va a comparar.
+	 * @return true: si son iguales.
+	 * 		   false: si son diferentes.
+	 */
 	public boolean equals(Object obj) {
 		boolean resultado = false;
 		if (obj instanceof Comb_y_result && super.equals(obj)

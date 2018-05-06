@@ -5,7 +5,7 @@ package mastermind;
  * 
  * 
  * 
- * @author Nicolás Navas Gómez
+ * @author Nicolas Navas Gomez
  * @version 1.0
  * @since 1.0
  *

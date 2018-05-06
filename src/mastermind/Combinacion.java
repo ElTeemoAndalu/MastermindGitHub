@@ -1,11 +1,12 @@
 package mastermind;
 
+
 /**
- * Esta clase guarda una combinación, que es un conjunto de casillas, y puede dibujarlam o hacer diversas comprobaciones o calculos sobre esta.
+ * Esta clase guarda una combinación, que es un conjunto de objetos tipo Casilla y puede hacer comprobaciones y calculos de sobre esta además de dibujarla.
  * 
  * 
  * 
- * @author Nicolás Navas Gómez
+ * @author Nicolas Navas Gomez
  * @version 1.0
  * @since 1.0
  *
@@ -42,7 +43,7 @@ public class Combinacion implements CombinacionDibujable, Cloneable {
 
 	// Equals
 	/**
-	 * Compara este color con el objeto que se le pasa.
+	 * Compara esta combinacion con el objeto que se le pasa.
 	 * @param El objeto con el que se va a comparar.
 	 * @return true: si son iguales.
 	 * 		   false: si son diferentes.
@@ -56,6 +57,10 @@ public class Combinacion implements CombinacionDibujable, Cloneable {
 	}
 
 	// Metodos aparte
+	/**
+	 * Dibuja la combinación, llamando al dibujar de cada casilla dentro de esta.
+	 * @see Casilla
+	 */
 	@Override
 	public void dibujar_elemento() {
 		System.out.printf("| ");
@@ -66,6 +71,9 @@ public class Combinacion implements CombinacionDibujable, Cloneable {
 
 	}
 	
+	/**
+	 * Dibuja la combinación pero con todas las casillas en negro (Oculto).
+	 */
 	public void dibujar_elemento_oculto() {
 		System.out.printf("| ");
 		for (int i = 0; i < tamanio(); i++) {
@@ -74,32 +82,29 @@ public class Combinacion implements CombinacionDibujable, Cloneable {
 		System.out.printf("| ");
 
 	}
-
+	/**
+	 * Devuelve el tamanio de esta combinacion.
+	 * @return El tamanio de la combinacion
+	 */
 	public int tamanio() {
 		return combinacion.length;
 	}
-
-	public boolean es_comb_llena() {
-		boolean esta_llena = false;
-		int cont = 0;
-
-		for (int i = 0; i < combinacion.length; i++) {
-			if (combinacion[i] == null) {
-				cont++;
-			}
-		}
-
-		if (cont == 0) {
-			esta_llena = true;
-		}
-
-		return esta_llena;
-	}
-
+	
+	/**
+	 * Cambia el color de una de las casillas de esta combinación según el color y la posición que reciba.
+	 * @param El numero que indica la posicion y el color que se pondra en la casilla de esa posicion
+	 * @see Casilla
+	 */
 	public void cambiar_color_casilla(int posicion, Color color) {
 		combinacion[posicion].setColor(color);
 	}
-
+	
+	/**
+	 * Comprueba si hay colores repetidos en esta combinacion.
+	 * @return true: si hay colores repetidos
+	 * 		   false: si no hay colores repetidos
+	 * @see Casilla
+	 */
 	public boolean comprobar_colores_repes() {
 		boolean color_repetido = false;
 		int i, j;
@@ -115,6 +120,12 @@ public class Combinacion implements CombinacionDibujable, Cloneable {
 		return color_repetido;
 	}
 
+	/**
+	 * Comprueba si los indicadores que ha introducido el usuario son correctos, corresponden con lo que hay en el cifrado.
+	 * @param La combinacion que actua como cifrado y que se usara para comparar colores, los indicadores negros(mismo color y posicion) y los indicadores grises (solo mismo color)
+	 * @return true: si ha introducido bien los indicadores
+	 * 		   false: si los ha introducido mal
+	 */
 	protected boolean comprobar_respuesta(Combinacion cifrado, int num_ind_Negros, int num_ind_Grises) {
 		int i, j, ind_Negros, ind_Blancos;
 		final int NUM_CASILLAS = combinacion.length;
@@ -152,6 +163,13 @@ public class Combinacion implements CombinacionDibujable, Cloneable {
 
 	}
 	
+	
+	/**
+	 * Devuelve la cantidad de indicadores negros y grises que daría como resultado esta combinacion.
+	 * @param Combinacion que actua como cifrado y que se usara para comparar colores.
+	 * @return Array de dos numeros que contiene tras los indicadores negros en la primera posicion y los grises en la segunda posicion.
+	 * @see Casilla
+	 */
 	protected int[] calcular_respuesta(Combinacion cifrado) {
 		int i, j,ind_Negr_Blan[] = {0,0};
 		final int NUM_CASILLAS = combinacion.length;

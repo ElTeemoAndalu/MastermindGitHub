@@ -17,13 +17,11 @@ public abstract class Jugador {
 		}
 		
 		if (turno == 0) { // Si estamos cifrando, se comprueba que no se repitan colores
-			if (!tablero.getCifrado().comprobar_colores_repes() && tablero.getCifrado().es_comb_llena()) {
+			if (!tablero.getCifrado().comprobar_colores_repes()) {
 				fila_valida = true;
 			}
 		} else { // Si no, solo que este llena, con que colores no importa
-			if (tablero.getCifrado().es_comb_llena()) {
 				fila_valida = true;
-			}
 		}
 		if (fila_valida) {
 			turno++;
