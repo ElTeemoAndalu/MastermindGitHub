@@ -1,5 +1,7 @@
 package mastermind;
 
+
+
 import java.util.Arrays;
 
 public class Comb_y_result extends Combinacion {
@@ -21,7 +23,7 @@ public class Comb_y_result extends Combinacion {
 			resultados[i].dibujar_elemento();
 
 		}
-		System.out.println("|");
+		System.out.printf("|");
 
 	}
 
@@ -29,14 +31,14 @@ public class Comb_y_result extends Combinacion {
 		super.dibujar_elemento();
 	}
 
-	protected void colocar_respuesta(int cant_ind_Negros, int cant_ind_Blancos) {
+	protected void colocar_respuesta(int cant_ind_Negros, int cant_ind_Grises) {
 		int i;
 
 		for (i = 0; i < cant_ind_Negros; i++) { // Coloca los indicadores negros en el resultado de la última
 												// combinación
 			resultados[i].setColor(Color.IND_NEGRO);
 		}
-		for (i = cant_ind_Negros; i < cant_ind_Negros + cant_ind_Blancos; i++) { // Coloca los indicadores blancos en el
+		for (i = cant_ind_Negros; i < cant_ind_Negros + cant_ind_Grises; i++) { // Coloca los indicadores blancos en el
 																					// resultado de la última
 																					// combinación
 			resultados[i].setColor(Color.IND_GRIS);
@@ -87,17 +89,6 @@ public class Comb_y_result extends Combinacion {
 			resultado = true;
 		}
 		return resultado;
-	}
-
-	// Clone
-	public Object clone() {
-		Comb_y_result clonado;
-		clonado = (Comb_y_result) super.clone();
-		clonado.resultados = resultados.clone();
-		for (int i = 0; i < resultados.length; i++) {
-			clonado.resultados[i] = (Indicador) resultados[i].clone();
-		}
-		return clonado;
 	}
 
 	// Getter

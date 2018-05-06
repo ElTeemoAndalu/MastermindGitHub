@@ -34,7 +34,7 @@ public class Usuario extends Jugador {
 		}
 
 		System.out.println(
-				"¿En que posición desea introducir la bola? (Introduzca 0 para volver a la pantalla anterior):\n");
+				"¿En que posición desea introducir la bola?:\n");
 
 		if (tablero.getCifrado().tamanio() == Dificultad.FACIL.getCasillas()) {
 			System.out.println("  1  2  3  4");
@@ -44,7 +44,7 @@ public class Usuario extends Jugador {
 
 		tablero.dibujar_comb_actual();
 
-		seleccion = Teclado.lecturaconlimites(0, tablero.numero_de_casillas(), Teclado.LimiteInfySup.INCLUIDOS, "") - 1;
+		seleccion = Teclado.lecturaconlimites(1, tablero.numero_de_casillas(), Teclado.LimiteInfySup.INCLUIDOS, "") - 1;
 
 		if (tablero.numero_de_casillas() <= NUM_CASILLAS_DIF_MEDIA) {// Se limitan y muestran los colores disponibles
 																		// segun la dificultad
@@ -58,7 +58,7 @@ public class Usuario extends Jugador {
 		} else {
 			num_colores = Dificultad.DIFICIL.getColores();
 			System.out.printf(
-					"Introduzca el color de la bola:(Introduzca 0 para volver al menu de partida)\n1.-%s  %s  2.-%s  %2$s\n3.-%s  %2$s  4.-%s  %2$s\n5.-%s  %2$s  6.-%s  %2$s\n7.-%s  %2$s  8.-%s  %2$s\n9.-%s  %2$s 10.-%s  %2$s",
+					"Introduzca el color de la bola:\n1.-%s  %s  2.-%s  %2$s\n3.-%s  %2$s  4.-%s  %2$s\n5.-%s  %2$s  6.-%s  %2$s\n7.-%s  %2$s  8.-%s  %2$s\n9.-%s  %2$s 10.-%s  %2$s",
 					Color.NEGRO.getCod_Color(), Color.RESETEAR.getCod_Color(), Color.ROJO.getCod_Color(),
 					Color.VERDE.getCod_Color(), Color.AMARILLO.getCod_Color(), Color.AZUL.getCod_Color(),
 					Color.MORADO.getCod_Color(), Color.CELESTE.getCod_Color(), Color.MORADO_CLARO.getCod_Color(),
@@ -108,7 +108,7 @@ public class Usuario extends Jugador {
 		int seleccion, num_colores;
 
 		System.out.println(
-				"¿En que posicion desea introducir la bola? (Introduzca 0 para volver a la pantalla anterior):\n");
+				"¿En que posicion desea introducir la bola?:\n");
 
 		if (tablero.getCifrado().tamanio() == Dificultad.FACIL.getCasillas()) {
 			System.out.println("  1  2  3  4");
@@ -118,21 +118,21 @@ public class Usuario extends Jugador {
 
 		tablero.dibujar_cifrado();
 
-		seleccion = Teclado.lecturaconlimites(0, tablero.numero_de_casillas(), Teclado.LimiteInfySup.INCLUIDOS, "") - 1;
+		seleccion = Teclado.lecturaconlimites(1, tablero.numero_de_casillas(), Teclado.LimiteInfySup.INCLUIDOS, "") - 1;
 
 		if (tablero.numero_de_casillas() <= NUM_CASILLAS_DIF_MEDIA) {// Se limitan y muestran los colores disponibles
 																		// segun la dificultad
 			num_colores = Dificultad.FACIL.getColores();// El número de colores de la dificultad fácil y media son los
 														// mismos
 			System.out.printf(
-					"Introduzca el color de la bola:(Introduzca 0 para volver al menu de partida)\n1.-%s  %s  2.-%s  %2$s\n3.-%s  %2$s  4.-%s  %2$s\n5.-%s  %2$s  6.-%s  %2$s\n7.-%s  %2$s  8.-%s  %2$s\n",
+					"Introduzca el color de la bola:\n1.-%s  %s  2.-%s  %2$s\n3.-%s  %2$s  4.-%s  %2$s\n5.-%s  %2$s  6.-%s  %2$s\n7.-%s  %2$s  8.-%s  %2$s\n",
 					Color.NEGRO.getCod_Color(), Color.RESETEAR.getCod_Color(), Color.ROJO.getCod_Color(),
 					Color.VERDE.getCod_Color(), Color.AMARILLO.getCod_Color(), Color.AZUL.getCod_Color(),
 					Color.MORADO.getCod_Color(), Color.CELESTE.getCod_Color(), Color.MORADO_CLARO.getCod_Color());
 		} else {
 			num_colores = Dificultad.DIFICIL.getColores();
 			System.out.printf(
-					"Introduzca el color de la bola:(Introduzca 0 para volver al menu de partida)\n1.-%s  %s  2.-%s  %2$s\n3.-%s  %2$s  4.-%s  %2$s\n5.-%s  %2$s  6.-%s  %2$s\n7.-%s  %2$s  8.-%s  %2$s\n9.-%s  %2$s 10.-%s  %2$s",
+					"Introduzca el color de la bola:\n1.-%s  %s  2.-%s  %2$s\n3.-%s  %2$s  4.-%s  %2$s\n5.-%s  %2$s  6.-%s  %2$s\n7.-%s  %2$s  8.-%s  %2$s\n9.-%s  %2$s 10.-%s  %2$s",
 					Color.NEGRO.getCod_Color(), Color.RESETEAR.getCod_Color(), Color.ROJO.getCod_Color(),
 					Color.VERDE.getCod_Color(), Color.AMARILLO.getCod_Color(), Color.AZUL.getCod_Color(),
 					Color.MORADO.getCod_Color(), Color.CELESTE.getCod_Color(), Color.MORADO_CLARO.getCod_Color(),
@@ -191,11 +191,11 @@ public class Usuario extends Jugador {
 			cant_Blancos = Teclado.lecturaconlimites(0, NUM_CASILLAS, Teclado.LimiteInfySup.INCLUIDOS,
 					"\n¿Bolas en diferente posición pero con el mismo color?");
 
-			if (tablero.getComb_y_result().get(tablero.ultima_combinacion_y_result())
+			if (tablero.getComb_y_result().get(tablero.ultima_comb_y_result())
 					.comprobar_respuesta(tablero.getCifrado(), cant_Negros, cant_Blancos)
 					&& (cant_Negros + cant_Blancos) < tablero.numero_de_casillas()) {
 
-				tablero.getComb_y_result().get(tablero.ultima_combinacion_y_result()).colocar_respuesta(cant_Negros,
+				tablero.getComb_y_result().get(tablero.ultima_comb_y_result()).colocar_respuesta(cant_Negros,
 						cant_Blancos);
 
 				indic_correctos = true;

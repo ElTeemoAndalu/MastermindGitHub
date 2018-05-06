@@ -1,5 +1,14 @@
 package mastermind;
-
+/**
+ * Esta clase guarda todos los colores disponibles junto a sus codigos.
+ * 
+ * 
+ * 
+ * @author Nicolás Navas Gómez
+ * @version 1.0
+ * @since 1.0
+ *
+ */
 public enum Color {
 	
 	NEGRO("\u001B[40m"),
@@ -18,13 +27,21 @@ public enum Color {
 	IND_NEGRO("\u001B[30m"),
 	IND_GRIS("\u001B[37m");
 	
-	
+	/**
+	 * Almacena el codigo correspondiente al color.
+	 */
 	private String cod_color;
-	
+	/**
+	 * Construye un color con el codigo del color que se le pasa.
+	 * @param El codigo del color.
+	 */
 	private Color(String cod_color) {
 		this.cod_color = cod_color;
 	}
-	
+	/**
+	 * Devuelve el codigo del color en cuestión.
+	 * @return El codigo del color.
+	 */
 	public String getCod_Color() {
 		return cod_color;
 	}

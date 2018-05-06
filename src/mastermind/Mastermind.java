@@ -87,7 +87,7 @@ public class Mastermind {
 	public void creditos() {
 		mostrar_Mastermind();
 		System.out.println(
-				"Director: Nicolas Navas Gomez\n\nProgramador: Nicolas Navas Gomez\n\nAnalista: Nicolas Navas Gomez");
+				"Director: Nicolás Navas Gómez\n\nProgramador: Nicolás Navas Gómez\n\nAnalista: Nicolás Navas Gómez");
 	}
 
 	

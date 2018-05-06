@@ -1,12 +1,29 @@
 package mastermind;
 
+/**
+ * Esta clase guarda una combinación, que es un conjunto de casillas, y puede dibujarlam o hacer diversas comprobaciones o calculos sobre esta.
+ * 
+ * 
+ * 
+ * @author Nicolás Navas Gómez
+ * @version 1.0
+ * @since 1.0
+ *
+ */
+
 import java.util.Arrays;
 
-public class Combinacion implements Dibujable, Cloneable {
-
+public class Combinacion implements CombinacionDibujable, Cloneable {
+	/**
+	 * Almacena un array de Casilla.
+	 * @see Casilla
+	 */
 	protected Casilla[] combinacion;
 
 	// Constructor
+	/**
+	 * Construye un nuevo objeto con todos las posiciones con las casillas por defecto.
+	 */
 	public Combinacion(int num_casillas) {
 		combinacion = new Casilla[num_casillas];
 		for (int i = 0; i < combinacion.length; i++) {
@@ -15,11 +32,21 @@ public class Combinacion implements Dibujable, Cloneable {
 	}
 
 	// Getter
+	/**
+	 * Devuelve la combinacion,el array de casillas.
+	 * @return Casilla[]
+	 */
 	public Casilla[] getCombinacion() {
 		return combinacion;
 	}
 
 	// Equals
+	/**
+	 * Compara este color con el objeto que se le pasa.
+	 * @param El objeto con el que se va a comparar.
+	 * @return true: si son iguales.
+	 * 		   false: si son diferentes.
+	 */
 	public boolean equals(Object obj) {
 		boolean resultado = false;
 		if (obj instanceof Combinacion && Arrays.equals(((Combinacion) obj).combinacion, combinacion)) {
@@ -88,7 +115,7 @@ public class Combinacion implements Dibujable, Cloneable {
 		return color_repetido;
 	}
 
-	protected boolean comprobar_respuesta(Combinacion cifrado, int num_ind_Negros, int num_ind_Blancos) {
+	protected boolean comprobar_respuesta(Combinacion cifrado, int num_ind_Negros, int num_ind_Grises) {
 		int i, j, ind_Negros, ind_Blancos;
 		final int NUM_CASILLAS = combinacion.length;
 		boolean en_resultado[] = new boolean[NUM_CASILLAS], resultado = false;
@@ -118,7 +145,7 @@ public class Combinacion implements Dibujable, Cloneable {
 			}
 		}
 		
-		if (num_ind_Negros == ind_Negros && num_ind_Blancos == ind_Blancos) {
+		if (num_ind_Negros == ind_Negros && num_ind_Grises == ind_Blancos) {
 			resultado = true;
 		}
 		return resultado;
@@ -158,45 +185,5 @@ public class Combinacion implements Dibujable, Cloneable {
 
 	}
 
-	/*protected boolean comprobar_respuesta() {
-		int i,j,ind_Negros;
-		final int NUM_CASILLAS = cifrado.combinacion.length;
-		ind_Negros = 0;
-		boolean en_resultado[] = new boolean[NUM_CASILLAS],resultado = false;
-		
-		for (i = 0; i < NUM_CASILLAS; i++) {
-			for (j = 0; i < NUM_CASILLAS; i++) {
-				if (!en_resultado[j]) {
-					if (comb_y_resultados.get(comb_y_resultados.size() - 1).getCombinacion()[i].getColor().equals(cifrado.getCombinacion()[j].getColor()) && i == j ) {
-						ind_Negros++;
-						en_resultado[j] = true;
-						j = NUM_CASILLAS;
-					}
-				}
-			}
-		}
-		
-		if(ind_Negros == NUM_CASILLAS) {
-			resultado = true;
-		}
-		
-		return resultado;
-		
-	}*/
-
-	// Clone
-	public Object clone() {
-		Combinacion clonado;
-		try {
-			clonado = (Combinacion) super.clone();
-			clonado.combinacion = combinacion.clone();
-			for (int i = 0; i < combinacion.length; i++) {
-				clonado.combinacion[i] = (Casilla) combinacion[i].clone();
-			}
-		} catch (CloneNotSupportedException e) {
-			clonado = null;
-		}
-		return clonado;
-	}
 
 }

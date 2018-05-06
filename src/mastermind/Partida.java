@@ -1,17 +1,16 @@
 package mastermind;
 
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 public class Partida {
 
 	private Jugador jugador1, jugador2;
-	private static int num_partida = 0;
 	private Dificultad dificultad;
 	private int turnoPartida;
 
 	public Partida(Dificultad dificultad) {
 		this.dificultad = dificultad;
-		++num_partida;
 		turnoPartida = 0;
 
 		if (dificultad == Dificultad.DIFICIL) {
@@ -25,7 +24,6 @@ public class Partida {
 
 	public Partida(Dificultad dificultad, boolean cifrando) {
 		this.dificultad = dificultad;
-		++num_partida;
 		turnoPartida = 0;
 		jugador1 = new Usuario(dificultad, cifrando);
 		jugador2 = new IA(dificultad, cifrando);
@@ -48,7 +46,7 @@ public class Partida {
 
 			} else {
 				// CAMBIAR ESTA LINEA CUANDO IA ESTE TERMINADA
-				((IA) jugador2).introducir_fila(((IA) jugador2).comb_random(jugador2.getTablero()));
+				((IA) jugador2).introducir_fila(((IA) jugador2).comb_random(jugador2.getTablero(),true));
 				jugador2.getTablero().dibujar_elemento();
 				jugador1.introducir_aciertos(jugador2.getTablero());
 
@@ -72,7 +70,7 @@ public class Partida {
 		while (!ganador && turnoPartida < dificultad.getIntentos()) {
 
 			if (jugador2.getTurno() == 0) {
-				((IA) jugador2).introducir_cifrado(((IA) jugador2).comb_random(jugador1.getTablero()),
+				((IA) jugador2).introducir_cifrado(((IA) jugador2).comb_random(jugador1.getTablero(),true),
 						jugador1.getTablero());
 
 			} else {
@@ -114,7 +112,7 @@ public class Partida {
 			if (turnoPartida == 0) {
 				System.out.println("Introduzca la combinación secreta de tu rival.");
 				((Usuario) jugador1).introducir_cifrado(jugador2.tablero);
-				((IA) jugador2).introducir_cifrado(((IA) jugador2).comb_random(jugador1.getTablero()),
+				((IA) jugador2).introducir_cifrado(((IA) jugador2).comb_random(jugador1.getTablero(),true),
 						jugador1.getTablero());
 				turnoPartida++;
 			} else {
@@ -136,7 +134,7 @@ public class Partida {
 				fila_valida = false;
 
 				// CAMBIAR ESTA LINEA CUANDO IA ESTE TERMINADA
-				((IA) jugador2).introducir_fila(((IA) jugador2).comb_random(jugador2.getTablero()));
+				((IA) jugador2).introducir_fila(((IA) jugador2).comb_random(jugador2.getTablero(),true));
 				System.out.println("Tablero de la IA");
 				jugador2.getTablero().dibujar_elemento();
 				jugador1.introducir_aciertos(jugador2.getTablero());
@@ -151,10 +149,50 @@ public class Partida {
 		}
 		mostrar_ganador(comprobar_ganador_medio_dif());
 	}
+	
+	
 
 	public void partida_dificil() {
+		
+		boolean ganador;
+
+		ganador = false;
+
+		while (!ganador) {
+
+			if (turnoPartida == 0) {
+				((IA) jugador1).introducir_cifrado(((IA) jugador1).comb_random(jugador2.getTablero(),false),jugador2.getTablero());
+				((IA) jugador2).introducir_cifrado(((IA) jugador2).comb_random(jugador1.getTablero(),false),jugador1.getTablero());
+				turnoPartida++;
+				jugador1.getTablero().dibujar_tableros_lado_a_lado(jugador2.getTablero());
+			} else {
+				((IA) jugador1).introducir_fila(((IA) jugador1).analisis_intento());
+				((IA) jugador2).introducir_aciertos(jugador1.getTablero());
+				((IA) jugador2).introducir_fila(((IA) jugador2).analisis_intento());
+				((IA) jugador1).introducir_aciertos(jugador2.getTablero());
+				
+				jugador1.getTablero().dibujar_tableros_lado_a_lado(jugador2.getTablero());
+				
+
+				if (comprobar_ganador_medio_dif() > 0 && turnoPartida > 10) {
+					ganador = true;
+				} else {
+					turnoPartida++;
+				}
+				
+				try {
+					TimeUnit.SECONDS.sleep(1);
+				} catch (InterruptedException e) {
+					System.out.println("error en la espera");
+				}
+				
+			}
+		}
+		mostrar_ganador(comprobar_ganador_medio_dif());
 
 	}
+	
+	
 
 	public int comprobar_ganador_dif_facil(boolean cifrando) {
 		int resultado = 0;
@@ -187,13 +225,13 @@ public class Partida {
 				jugador2.getTablero().coger_ultima_combinacion())) {
 			resultado = 1;
 		} else if ((turnoPartida + 1) > dificultad.getIntentos()) {
-			if (jugador1.getTablero().getComb_y_result().get(jugador1.getTablero().ultima_combinacion_y_result())
+			if (jugador1.getTablero().getComb_y_result().get(jugador1.getTablero().ultima_comb_y_result())
 					.comparar_respuestas(jugador2.getTablero().getComb_y_result()
-							.get(jugador2.getTablero().ultima_combinacion_y_result())) == 1) {
+							.get(jugador2.getTablero().ultima_comb_y_result())) == 1) {
 				resultado = 1;
-			} else if (jugador1.getTablero().getComb_y_result().get(jugador1.getTablero().ultima_combinacion_y_result())
+			} else if (jugador1.getTablero().getComb_y_result().get(jugador1.getTablero().ultima_comb_y_result())
 					.comparar_respuestas(jugador2.getTablero().getComb_y_result()
-							.get(jugador2.getTablero().ultima_combinacion_y_result())) == 2) {
+							.get(jugador2.getTablero().ultima_comb_y_result())) == 2) {
 				resultado = 2;
 			} else {
 				resultado = 0;
@@ -211,11 +249,6 @@ public class Partida {
 		}
 		System.out.println("Pulse intro para continuar");
 		Teclado.leercadena();
-	}
-
-	// Getters
-	public static int getNum_partida() {
-		return num_partida;
 	}
 
 	public Dificultad getDificultad() {
