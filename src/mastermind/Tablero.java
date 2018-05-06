@@ -62,7 +62,7 @@ public class Tablero implements TableroDibujable {
 
 			comb_y_resultado.dibujar_elemento();
 
-			System.out.printf("|");
+			System.out.printf("\n|");
 			if (itComb.hasPrevious()) {
 				for (int i = 0; i < (NUM_BORDES - SEPARACION - NUM_CASILLAS * BORDE_x_ACIERTO) - 1; i++) {
 					System.out.printf(" "); // Numero de espacios desde el borde izquierdo hasta la primera separación
@@ -114,7 +114,7 @@ public class Tablero implements TableroDibujable {
 
 			comb_y_resultado.dibujar_elemento();
 
-			System.out.printf("|");
+			System.out.printf("\n|");
 			if (itComb.hasPrevious()) {
 				for (int i = 0; i < (NUM_BORDES - SEPARACION - NUM_CASILLAS * BORDE_x_ACIERTO) - 1; i++) {
 					System.out.printf(" "); // Numero de espacios desde el borde izquierdo hasta la primera separación
