@@ -1,13 +1,32 @@
 package mastermind;
 
+/**
+ * Esta clase sirve para guiar al usuario por las pantallas principales del juego y para crear partidas.
+ * 
+ * 
+ * 
+ * @author Nicolas Navas Gomez
+ * @version 1.0
+ * @since 1.0
+ *
+ */
+
 public class Mastermind {
-
+	
+	/** Almacena la partida que seleccione el usuario poseteriormente
+	 * @see Partida*/
 	private Partida partida;
-
+	
+	/**
+	 * Al construirse el objeto Mastermind se lanza el metodo que enlazara con todos los demas, el menu principal
+	 */
 	public Mastermind() {
 		menu_principal();
 	}
-
+	
+	/**
+	 * Metodo para mostrar la palabra mastermind en letras grandes formadas por diferentes simbolos
+	 */
 	public void mostrar_Mastermind() {
 		System.out.println(
 				" ____      ____         _____       _________   _______________   ___________   ___________   ____      ____   _______________   _____     ___   __________");
@@ -26,7 +45,10 @@ public class Mastermind {
 		System.out.println(
 				"|____|    |____| /___/         \\___\\|________|       |___|       |___________| |___|   \\___ \\|____|    |____| |_______________| |____|   \\____| |__________/");
 	}
-
+	
+	/**
+	 * Metodo que muestra las opciones del menu principal del juego. A través de el se accede al reso de menus.
+	 */
 	public void menu_principal() {
 		mostrar_Mastermind();
 		switch (Teclado.lecturaconlimites(1, 3, Teclado.LimiteInfySup.INCLUIDOS,
@@ -45,7 +67,10 @@ public class Mastermind {
 				break;
 		}
 	}
-
+	
+	/**
+	 * Metodo que enlaza al menu de modos de la dificultad facil en caso de selecciona la primera opcion, en el resto de casos crea un Partida con la dificultad escogida.
+	 */
 	public void dificultades() {
 		mostrar_Mastermind();
 		switch (Teclado.lecturaconlimites(1, 3, Teclado.LimiteInfySup.INCLUIDOS,
@@ -66,7 +91,10 @@ public class Mastermind {
 		}
 		menu_principal();
 	}
-
+	
+	/**
+	 * Crea un Partida dependiendo del modo escogido, cifrando o descifrando .
+	 */
 	public void modos_dific_facil() {
 		mostrar_Mastermind();
 		switch (Teclado.lecturaconlimites(1, 3, Teclado.LimiteInfySup.INCLUIDOS,
@@ -83,7 +111,10 @@ public class Mastermind {
 				break;
 		}
 	}
-
+	
+	/**
+	 * Muestra los creditos del proyecto
+	 */
 	public void creditos() {
 		mostrar_Mastermind();
 		System.out.println(

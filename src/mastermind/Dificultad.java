@@ -13,23 +13,37 @@ package mastermind;
 
 public enum Dificultad {
 	
+	/** Facil. */
 	FACIL(4,8,false,10),
+	
+	/** Medio. */
 	MEDIO(5,8,false,15),
+	
+	/** Dificil. */
 	DIFICIL(8,10,true,9999); //9999 Se traducirá a intentos infinitos
 	
-	private Dificultad(int casillas,int colores,boolean repeticion,int intentos) {
+	/**
+  * Crea un nuevo objeto dificultad con los parametros establecidos.
+  *
+  * @param casillas numero de casillas para las combinaciones
+  * @param colores cantidad de colores disponibles
+  * @param repeticion si se pueden repetir o no los colores
+  * @param intentos numero maximo de intentos en una partida
+  */
+ private Dificultad(int casillas,int colores,boolean repeticion,int intentos) {
 		this.casillas = casillas;
 		this.colores = colores;
 		this.repeticion = repeticion;
 		this.intentos = intentos;
 	}
 	
-	/**
-	 * {@link #casillas} casillas almacena el numero de casillas que tendran las combinaciones de esa dificultad.
-	 * {@link #colores} colores almacena el numero de colores que podran tener las combinaciones de esa dificultad.
-	 * {@link #intentos} colores almacena el máximo numero de combinaciones para un tablero.
-	 */
-	int casillas,colores,intentos;
+	
+	/** Numero de casillas para las combinaciones. */
+	int casillas;
+	/** Numero que determina los tipos de colores que pueden usar las combinaciones. */
+	int colores;
+	/** Numero maximo de intentos en una partida. */
+	int intentos;
 	
 	/**
 	 * Almacena si se pueden repetir colores o no en la dificultad escoginda.
