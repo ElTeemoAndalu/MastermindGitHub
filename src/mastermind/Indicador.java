@@ -17,7 +17,7 @@ public class Indicador extends Casilla {
 
 	// Constructor
 		/**
-		 * Construye un nuevo objeto con el color por defecto ( IND_INVI -> color blanco, invisible si esta en fondo blanco ).
+		 * Construye un nuevo objeto con el color por defecto ( IND_INVI es color blanco, invisible si esta en fondo blanco ).
 		 */
 	public Indicador() {
 		color = Color.IND_INVI;

@@ -5,7 +5,7 @@ package mastermind;
  * 
  * 
  * 
- * @author Nicolás Navas Gómez
+ * @author Nicolas Navas Gomez
  * @version 1.0
  * @since 1.0
  *
@@ -25,9 +25,9 @@ public enum Dificultad {
 	}
 	
 	/**
-	 * casillas: almacena el numero de casillas que tendran las combinaciones de esa dificultad.
-	 * colores: almacena el numero de colores que podran tener las combinaciones de esa dificultad.
-	 * colores: almacena el máximo numero de combinaciones para un tablero.
+	 * {@link #casillas} casillas almacena el numero de casillas que tendran las combinaciones de esa dificultad.
+	 * {@link #colores} colores almacena el numero de colores que podran tener las combinaciones de esa dificultad.
+	 * {@link #intentos} colores almacena el máximo numero de combinaciones para un tablero.
 	 */
 	int casillas,colores,intentos;
 	

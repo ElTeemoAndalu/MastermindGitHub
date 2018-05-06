@@ -24,6 +24,7 @@ public class Combinacion implements CombinacionDibujable, Cloneable {
 	// Constructor
 	/**
 	 * Construye un nuevo objeto con todos las posiciones con las casillas por defecto.
+	 * @param num_casillas numero de casillas que tendra la combinacion
 	 */
 	public Combinacion(int num_casillas) {
 		combinacion = new Casilla[num_casillas];

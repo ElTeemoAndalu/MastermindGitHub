@@ -1,7 +1,9 @@
 package mastermind;
 
+import java.util.Arrays;
+
 /**
- * Esta además de una combinación, su resultado, que es un conjunto de objetos tipo Indicador y puede hacer comprobaciones y calculos de sobre esta además de dibujarla.
+ * Esta además de una combinacion, tiene su resultado, que es un conjunto de objetos tipo Indicador y puede hacer comprobaciones y calculos de sobre esta además de dibujarla.
  * 
  * 
  * 
@@ -10,10 +12,6 @@ package mastermind;
  * @since 1.0
  *
  */
-
-
-import java.util.Arrays;
-
 public class Comb_y_result extends Combinacion {
 	/**
 	 * Almacena un array de Indicador.

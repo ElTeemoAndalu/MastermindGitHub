@@ -1,5 +1,8 @@
 package mastermind;
 
+import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
+
 /**
  * Esta clase almacena a los jugadores y la dificultad y determina el flujo de las partidas segun la dificultad,
  * 
@@ -10,10 +13,6 @@ package mastermind;
  * @since 1.0
  *
  */
-
-import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
-
 public class Partida {
 
 	private Jugador jugador1, jugador2;
@@ -254,9 +253,9 @@ public class Partida {
 
 	public void mostrar_ganador(int ganador) {
 		if (ganador > 0) {
-			System.out.println("Jugador " + ganador + " gana ＼（＾∀＾）メ（＾∀＾）ノ");
+			System.out.println("Jugador " + ganador + " gana ");
 		} else {
-			System.out.println("Empate o(╥﹏╥)o");
+			System.out.println("Empate");
 		}
 		System.out.println("Pulse intro para continuar");
 		Teclado.leercadena();
