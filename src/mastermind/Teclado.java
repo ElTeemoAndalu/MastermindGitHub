@@ -3,6 +3,17 @@ package mastermind;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Esta clase sirve para la lectura de lo que introduce el usuario.
+ * 
+ * 
+ * 
+ * @author Nicolas Navas Gomez
+ * @version 1.0
+ * @since 1.0
+ *
+ */
+
 public class Teclado {
 
 	public enum Comparacion {

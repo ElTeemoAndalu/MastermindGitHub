@@ -1,8 +1,9 @@
 package mastermind;
 
+import java.util.Arrays;
 
 /**
- * Esta clase guarda una combinación, que es un conjunto de objetos tipo Casilla y puede hacer comprobaciones y calculos de sobre esta además de dibujarla.
+ * Esta clase guarda una combinacion, que es un conjunto de objetos tipo Casilla y puede hacer comprobaciones y calculos de sobre esta además de dibujarla.
  * 
  * 
  * 
@@ -11,8 +12,6 @@ package mastermind;
  * @since 1.0
  *
  */
-
-import java.util.Arrays;
 
 public class Combinacion implements CombinacionDibujable, Cloneable {
 	/**
@@ -130,7 +129,7 @@ public class Combinacion implements CombinacionDibujable, Cloneable {
 	 * @return true: si ha introducido bien los indicadores
 	 * 		   false: si los ha introducido mal
 	 */
-	protected boolean comprobar_respuesta(Combinacion cifrado, int num_ind_Negros, int num_ind_Grises) {
+	public boolean calcular_respuesta(Combinacion cifrado, int num_ind_Negros, int num_ind_Grises) {
 		int i, j, ind_Negros, ind_Blancos;
 		final int NUM_CASILLAS = combinacion.length;
 		boolean en_resultado[] = new boolean[NUM_CASILLAS], resultado = false;
@@ -174,7 +173,7 @@ public class Combinacion implements CombinacionDibujable, Cloneable {
 	 * @return Array de dos numeros que contiene tras los indicadores negros en la primera posicion y los grises en la segunda posicion.
 	 * @see Casilla
 	 */
-	protected int[] calcular_respuesta(Combinacion cifrado) {
+	public int[] calcular_resultado(Combinacion cifrado) {
 		int i, j,ind_Negr_Blan[] = {0,0};
 		final int NUM_CASILLAS = combinacion.length;
 		boolean en_resultado[] = new boolean[NUM_CASILLAS];

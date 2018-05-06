@@ -3,12 +3,73 @@ package mastermind;
 import java.util.HashMap;
 import java.util.Random;
 
+/**
+ * Esta clase define lo que es una IA en una partida.
+ * 
+ * 
+ * 
+ * @author Nicolas Navas Gomez
+ * @version 1.0
+ * @since 1.0
+ *
+ */
 public class IA extends Jugador {
-
-	private HashMap<Byte, Comb_y_result> tableroAux;
-	private boolean colores_encontrados, color_encontrado[], color_en_cifr[];
-	private byte min_cantidad,turno_colores_encontrados,total_colores_encontrados,posicion_actual, posicion_anterior,color_actual, cont_color_restantes,cant_colores[];
 	
+	/**
+	 * Almacena un tablero auxiliar en el que se guardan las combinaciones que se usaran para analizar e introducir combinaciones en el tablero principal.
+	 */
+	private HashMap<Byte, Comb_y_result> tableroAux;
+	/**
+	 * Determina si se han encontrado o no todos los colores del cifrado del tablero de la IA.
+	 */
+	private boolean colores_encontrados;
+	/**
+	 * Determina por cada color si se ha encontrado o no el color en el cifrado del tablero de la IA.
+	 */
+	private boolean color_encontrado[];
+	/**
+	 * Determina por cada posicion si ya tiene un color definitivo que coincide con el cifrado del tablero de la IA actual.
+	 */
+	private boolean color_en_cifr[];
+	/**
+	 * Almacena entre las cantidades de los colores encontrados cual es la minima. Esta cifra cambiara si todos los colores con la misma cantidad en el cifrado han sido encotrados.
+	 */
+	private byte min_cantidad;
+	/**
+	 * Guarda el turno en el que se ha encotrado todos los colores.
+	 */
+	private byte turno_colores_encontrados;
+	/**
+	 * Guarda la cantidad de colores encotrados en el cifrado hasta el momento.
+	 */
+	private byte total_colores_encontrados;
+	/**
+	 * Guarda la posicion en la que se estan haciendo las comprobaciones actualmente. Cambia si en la posicion actual ya se ha encotrado el color.
+	 */
+	private byte posicion_actual;
+	/**
+	 * Guarda la posicion anterior en la que estaba la pasicion actual.
+	 */
+	private byte posicion_anterior;
+	/**
+	 * Almacena el color que se esta intentando encontrar en el cifrado.
+	 */
+	private byte color_actual;
+	/**
+	 * Almacena la cantidad de veces que se repite un color en un cifrado.Además se va reduciendo cuando se encuentran, a modo de contador.
+	 */
+	private byte cont_color_restantes;
+	/**
+	 * Lista que almacena las cantidades de colores. Cada posicion corresponde a un color y almacena la cantidad de veces que se ha encontrado este en el cifrado.
+	 */
+	private byte cant_colores[];
+	
+	// Constructor
+		/**
+		 * Pensado para la dificultad media y dificil. Construye un nuevo objeto en base a la dificultad, creando el tablero cogiendo el numero de casillas de la dificultad e inicializando determinadas variables de esta clase en funcion tambien de si se ha escogido medio o dificil.
+		 * @param dificultad Determina la longitud del tablero, el numero de colores que usará la IA y tambien las variables que usara la IA.
+		 * @see Tablero
+		 */
 	protected IA(Dificultad dificultad) {
 		tablero = new Tablero(dificultad);
 		turno = 0;
@@ -30,7 +91,11 @@ public class IA extends Jugador {
 			} 
 		}
 	}
-
+	/**
+	 * Pensada para la dificultad facil. Crea el tablero dependiendo de si el usuario esta cifrando o no y detremina el turno en el que se encuentra la IA.
+	 * @param dificultad Determina el tamaño del tablero y la cantidad de colores, si se crea.
+	 * @param cifrando	Indica si el usuario esta ha elegido el modo cifrar o descifrar
+	 */
 	protected IA(Dificultad dificultad, boolean cifrando) {
 		if (dificultad == Dificultad.FACIL && cifrando) {
 			tablero = new Tablero(dificultad);
@@ -44,11 +109,22 @@ public class IA extends Jugador {
 
 		filaCreada = false;
 	}
-
+	
+	// Constructor
+		/**
+		 * Devuelve el tablero de la IA escogida.
+		 * @return tablero de la IA 
+		 */
 	public Tablero getTablero() {
 		return tablero;
 	}
-
+	
+	/**
+	 * Cambia el color de una de las bolas/casillas del cifrado o una combinacion normal, depende del turno y del tablero que se le pase
+	 * @param posicion Determina que bola/casilla se cambiara de color
+	 * @param color	Establece por que color sera cambiada la bola/casilla
+	 * @param tablero Determina en que tablero se cambiara el color de la bola
+	 */
 	protected void introducir_bola(int posicion, Color color, Tablero tablero) {
 		if (turno > 0) {
 			tablero.coger_ultima_combinacion()[posicion].setColor(color);
@@ -57,6 +133,11 @@ public class IA extends Jugador {
 		}
 	}
 
+	/**
+	 * Añade una combinacion al tablero si no se había hecho ya, y cambia los colores de la combinacion actual segun la combinacion que se le pase
+	 * @param combinacion Combinacion que sirve de referencia para saber que colores poner en la combinacion actual
+	 * @see #introducir_bola(int, Color, Tablero)
+	 */
 	public void introducir_fila(Combinacion combinacion) {
 		if (!filaCreada) {
 			tablero.aniadir_combinacion();
@@ -68,7 +149,12 @@ public class IA extends Jugador {
 		filaCreada = false;
 		turno++;
 	}
-
+	
+	/**
+	 * Permite a la IA cambiar los colores del cifrado del contricante. Solo se usa en el turno 0 cuando toca establecer los cifrados.
+	 * @param combinacion combinacion Combinacion que sirve de referencia para saber que colores poner en el cifrado
+	 * @param tablero Tablero del rival
+	 */
 	public void introducir_cifrado(Combinacion combinacion, Tablero tablero) {
 		for (int i = 0; i < tablero.getCifrado().tamanio(); i++) {
 			introducir_bola(i, combinacion.getCombinacion()[i].getColor(), tablero);
@@ -77,7 +163,13 @@ public class IA extends Jugador {
 		turno++;
 
 	}
-
+	
+	/**
+	 * Devuelve a la IA una combinacion con colores aleatorios, que estaran repetidos o no dependiendo de la dificultad
+	 * @param tablero	tablero que sirve como referencia para saber el tamaño de la combinacion
+	 * @param no_repetir_color Determina si devolvera una combinacion con colores repetidos o no
+	 * @return Una combinacion con colores aleatorios
+	 */
 	public Combinacion comb_random(Tablero tablero,boolean no_repetir_color) {
 		Random rnd = new Random();
 		Combinacion combinacion = new Combinacion(tablero.numero_de_casillas());
@@ -125,56 +217,26 @@ public class IA extends Jugador {
 		} while (combinacion.comprobar_colores_repes() && no_repetir_color);
 		return combinacion;
 	}
+	
 
 	@Override
+	/**
+	 * Permite a la IA introducir los aciertos de la ultima combinacion en el tablero de su rival
+	 * @param tablero Tablero del rival
+	 */
 	protected void introducir_aciertos(Tablero tablero) {
 		int ind_Negr_Blan[];
 
 		ind_Negr_Blan = tablero.getComb_y_result().get(tablero.ultima_comb_y_result())
-				.calcular_respuesta(tablero.getCifrado());
+				.calcular_resultado(tablero.getCifrado());
 
 		tablero.getComb_y_result().get(tablero.ultima_comb_y_result()).colocar_respuesta(ind_Negr_Blan[0],
 				ind_Negr_Blan[1]);
 	}
 
-	// Planteamiento
-	/*
-	 * 1.- Si se ha introducido una fila previamente 
-	 * 	1.1.- Se guarda la combinación y el resultado (resultado = (ind_Negros x 10) + ind_Blancos)
-	 * 
-	 * 
-	 * 2.- Si no se han encontrado los colores
-	 * 
-	 * 	2.1.- Si se ha introducido una fila previamente 
-	 * 		2.1.1.- Se guarda la cantidad de aciertos del color introducido, sin importar si el indicador es negro o gris
-	 * 
-	 * 	2.2.- Si era el último color o se han encontrado todos los colores 2.2.1.- Se
-	 * 	guarda esa información
-	 * 
-	 * 	2.3.- Si no 
-	 * 		2.3.1.- Se guarda una combinación compuesta por un solo color
-	 * 
-	 * 
-	 * 3.- Si se han encontrado todos los colores
-	 * 
-	 * 	3.1.- Si es el primer turno después de encontrar los colores 
-	 * 		3.1.1.- Se rellena la combinación de uno de los colores que no esté
-	 * 
-	 * 	3.2.- Si no se ha hecho ya, se coge un color,de los encontrados,, que tenga una sola casilla en el cifrado y no se haya encontrado su posición 
-	 * 		3.2.1.- Si en el intento anterior no se encontró, se tacha la posición y se pasa a la siguiente 
-	 * 		3.2.2.- Se coloca en la primera posición disponible 
-	 * 		3.2.3.- Se guarda la combinación
-	 * 
-	 * 	3.3.- Si se han acabado los colores con una sola casilla en el cifrado, se 
-	 * 	van cogiendo el resto colores, que tengan más de una casilla en el cifrado y
-	 * 	no se haya encontrado su posición 
-	 * 		3.3.1.- Si quedan en el cifrado el mismo número de casillas sin color encontrado que en la cantidad del color que se
-	 * 		esta probando se colocan 
-	 * 		3.3.2.- Si no 
-	 * 			3.3.2.1.- Se va provando uno a uno al igual que en el paso 3.2 
-	 * 		3.3.3.- Se guarda la combinación
-	 * 
-	 * 3.4.- Se devuelve la combinación
+	/**
+	 * Analiza la situacion de la IA en la partida actual y devuelve un combinacion en base a eso. Empieza por descubrir todos los colores en su cifrado y luego va averiguando sus posiciones.
+	 * @return Combinacion con colores que dependen del turno y de los colores y posiciones encontradas
 	 */
 	public Combinacion analisis_intento() {
 		
@@ -365,24 +427,11 @@ public class IA extends Jugador {
 		return nueva_comb;
 	}
 
-	/*private void ordenar_colores_por_cantidad() {
-		byte i, j, aux;
-
-		for (i = 0; i < cant_colores.length; i++) {
-			for (j = (byte) (i + 1); j < cant_colores.length; j++) {
-				if(cant_colores[i] == 0) {
-					
-				}
-				if (cant_colores[i] > cant_colores[j]) {
-					aux = cant_colores[i];
-					cant_colores[i] = cant_colores[j];
-					cant_colores[j] = aux;
-				}
-			}
-
-		}
-	}*/
-
+	/**
+	 * Devuelve un color en base al numero introducido.
+	 * @param numero Determina que color se devolvera
+	 * @return	Color Color resultante del numero introducido
+	 */
 	private Color coger_color(int numero) {
 		Color color = null;
 

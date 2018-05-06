@@ -1,5 +1,8 @@
 package mastermind;
 
+import java.util.ArrayList;
+import java.util.ListIterator;
+
 /**
  * Esta clase almacena las combinaciones y resultados ademas del cifrado que forma un tablero, y permite dibujarlo de varias formas además de ser modificado.
  * 
@@ -10,9 +13,6 @@ package mastermind;
  * @since 1.0
  *
  */
-
-import java.util.ArrayList;
-import java.util.ListIterator;
 
 public class Tablero implements TableroDibujable {
 	/**

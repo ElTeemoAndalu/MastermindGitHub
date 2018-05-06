@@ -1,13 +1,39 @@
 package mastermind;
 
-public class Usuario extends Jugador {
 
+/**
+ * Esta clase define lo que puede hacer un usuario en una partida.
+ * 
+ * 
+ * 
+ * @author Nicolas Navas Gomez
+ * @version 1.0
+ * @since 1.0
+ *
+ */
+
+public class Usuario extends Jugador {
+	
+	// Constructor
+		/**
+		 * Pensado para dificultades media o dificil.Construye un nuevo de tipo usuario creando ademas el tablero en funcion de la dificultad de la partida.
+		 * @param dificultad determina el tamaño del tablero y cuantos colores podra usar el usuario
+		 * @see Tablero
+		 * @see Dificultad
+		 */
 	protected Usuario(Dificultad dificultad) {
 		tablero = new Tablero(dificultad);
 		turno = 0;
 		filaCreada = false;
 	}
-
+	
+	/**
+	 * Pensado para la dificultad facil.Construye un nuevo de tipo usuario. Establece el turno por el que empieza y si se crea el table en funcion del modo escogido.
+	 * @param dificultad determina el tamaño del tablero y cuantos colores podra usar el usuario
+	 * @param cifrando especifica si el usuario creara el cifrado o no
+	 * @see Tablero
+	 * @see Dificultad
+	 */
 	protected Usuario(Dificultad dificultad, boolean cifrando) {
 		if (dificultad == Dificultad.FACIL && !cifrando) {
 			tablero = new Tablero(dificultad);
@@ -22,6 +48,10 @@ public class Usuario extends Jugador {
 		filaCreada = false;
 	}
 	
+	/**
+	 * Permite al usuario introducir una bola en la ultima combinacion de su tablero
+	 * @see Tablero
+	 */
 	protected void introducir_bola() {
 		final int NUM_CASILLAS_DIF_MEDIA = 5;
 		int seleccion, num_colores;
@@ -103,6 +133,11 @@ public class Usuario extends Jugador {
 		}
 	}
 	
+	/**
+	 * Permite al usuario introducir una bola en el cifrado del tablero de su rival.
+	 * @param tablero Tablero del rival
+	 * @see Tablero
+	 */
 	protected void introducir_bola_cifrado(Tablero tablero) {
 		final int NUM_CASILLAS_DIF_MEDIA = 5;
 		int seleccion, num_colores;
@@ -175,7 +210,12 @@ public class Usuario extends Jugador {
 		}
 
 	}
-
+	
+	/**
+	 * Permite al usuario introducir los aciertos de su rival en la ultima combinacion.
+	 * @param tablero Tablero del rival
+	 * @see Tablero
+	 */
 	@Override
 	protected void introducir_aciertos(Tablero tablero) {
 
@@ -192,7 +232,7 @@ public class Usuario extends Jugador {
 					"\n¿Bolas en diferente posición pero con el mismo color?");
 
 			if (tablero.getComb_y_result().get(tablero.ultima_comb_y_result())
-					.comprobar_respuesta(tablero.getCifrado(), cant_Negros, cant_Blancos)
+					.calcular_respuesta(tablero.getCifrado(), cant_Negros, cant_Blancos)
 					&& (cant_Negros + cant_Blancos) < tablero.numero_de_casillas()) {
 
 				tablero.getComb_y_result().get(tablero.ultima_comb_y_result()).colocar_respuesta(cant_Negros,
@@ -208,7 +248,12 @@ public class Usuario extends Jugador {
 		} while (!indic_correctos);
 
 	}
-
+	
+	/**
+	 * Permite al usuario introducir el cifrado del tablero de su rival.
+	 * @param tablero Tablero del rival
+	 * @see #introducir_bola_cifrado(Tablero)
+	 */
 	public void introducir_cifrado(Tablero tablero) {
 		int seleccion;
 		boolean fila_valida = false;
@@ -227,6 +272,10 @@ public class Usuario extends Jugador {
 		} while (!fila_valida);
 	}
 	
+	/**
+	 * Le muestra al jugador las acciones que puede hacer ahora mientras esta descifrando.
+	 * @return Numero representa la opcion escogida por el usuario
+	 */
 	public int opciones_jugador_descifrando() {
 		String opciones = "";
 			if (filaCreada) {
@@ -237,6 +286,11 @@ public class Usuario extends Jugador {
 		return Teclado.lecturaconlimites(1, 2, Teclado.LimiteInfySup.INCLUIDOS, opciones);
 	}
 	
+	/**
+	 * Le muestra al jugador las acciones que puede hacer mientras esta cifrando. Dependen de si ha introducido colores repetidos o no.
+	 * @param tablero Se usa para saber si el usuario ha introducido colores repetidos 
+	 * @return Numero representa la opcion escogida por el usuario
+	 */
 	public int opciones_jugador_cifrando(Tablero tablero) {
 		String opciones = "";
 			if (tablero.getCifrado().comprobar_colores_repes()) {

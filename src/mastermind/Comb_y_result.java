@@ -22,7 +22,8 @@ public class Comb_y_result extends Combinacion {
 	/**
 	 * Construye un nuevo objeto con todos las posiciones con los indicadores por defecto.
 	 * @param num_casillas numero de casillas de la combinación que es igual que el de los indicadores, que viene determinado por la dificultad
-	 * @see Indicador , Casilla
+	 * @see Indicador
+	 * @see Casilla
 	 */
 	public Comb_y_result(int num_casillas) {
 		super(num_casillas);
