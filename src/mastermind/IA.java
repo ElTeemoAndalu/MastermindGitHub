@@ -1,5 +1,6 @@
 package mastermind;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -242,7 +243,7 @@ public class IA extends Jugador {
 		
 		Combinacion nueva_comb = new Combinacion(tablero.numero_de_casillas());
 		Color color_no_encontrado, color_a_encontrar;
-		byte ultimo_pincho_negro,i, j,casillas_restantes;
+		byte ultimo_pincho_negro,i, j,casillas_restantes,aumento_del_minimo = 0;
 		boolean siguiente_cant = true;
 		
 		ultimo_pincho_negro = casillas_restantes = 0;
@@ -313,16 +314,18 @@ public class IA extends Jugador {
 				
 				ultimo_pincho_negro *=10;
 				
-				if(tableroAux.containsKey(Byte.valueOf((byte)(ultimo_pincho_negro+10)))) {
+				if(tableroAux.containsKey(Byte.valueOf((byte)(ultimo_pincho_negro + 10)))) {
 					//Indicamos que se ha encontrado la posición de un color y el propio color
 					color_en_cifr[posicion_anterior] = true;
 					cont_color_restantes--;
+					
 					if (cont_color_restantes == 0) {
 						color_encontrado[color_actual] = true;
 						color_actual = 0;
 					} else {
 						color_encontrado[color_actual] = false;
 					}
+					
 					posicion_actual = 0;
 
 				}
@@ -335,26 +338,33 @@ public class IA extends Jugador {
 			
 				
 				for (j = 0; j < cant_colores.length; j++) {
-					if(cant_colores[j] == min_cantidad) {
-						if(!color_encontrado[j]) {
-							siguiente_cant = false;
-						}
+					if(cant_colores[j] == min_cantidad && !color_encontrado[j]) {
+							siguiente_cant = false;	
 					}
 					
 				}
 
 				if(siguiente_cant) {
-					min_cantidad++;
+					for (i = 0; i < color_en_cifr.length && siguiente_cant; i++) {
+						for (j = 0; j < cant_colores.length && siguiente_cant; j++) {
+							if (cant_colores[j] > min_cantidad && cant_colores[j] == i) {
+								aumento_del_minimo = cant_colores[j];
+								siguiente_cant = false;
+							}
+						}
+						
+					}
+					min_cantidad = aumento_del_minimo;
 				}
 				
 				//Cogemos uno de los colores que estan en el cifrado, que todavía no hayamos ubicado en este
-				while (color_actual < cant_colores.length-1 && (cant_colores[color_actual] != min_cantidad || color_encontrado[color_actual])) {
+				while (color_actual < cant_colores.length  && (cant_colores[color_actual] != min_cantidad || color_encontrado[color_actual])) {
 					color_actual++;
 				}
 				
 				
 				//Nos vamos a una posición que no tenga ya un color defitivo
-					while (posicion_actual < color_en_cifr.length-1 && color_en_cifr[posicion_actual]) {
+					while (posicion_actual < color_en_cifr.length && color_en_cifr[posicion_actual]) {
 						posicion_actual++;
 					}
 
@@ -368,7 +378,7 @@ public class IA extends Jugador {
 				//Si la cantidad del color que hemos escogido es igual a 1
 				if (cant_colores[color_actual] == 1) {
 					//Y la combinación anterior ha dado como resultado un picho negro mas
-					if(tableroAux.containsKey(Byte.valueOf((byte)(ultimo_pincho_negro+10)))) {
+					if(tableroAux.containsKey(Byte.valueOf((byte)(ultimo_pincho_negro + 10)))) {
 						//Y rehacemos los pasos anteriores con la información obtenida
 						nueva_comb = analisis_intento();
 						
@@ -391,20 +401,33 @@ public class IA extends Jugador {
 						if (cont_color_restantes == 0) {
 							cont_color_restantes = cant_colores[color_actual];
 						}
+						for (j = 0; j < nueva_comb.tamanio(); j++) {
+							nueva_comb.cambiar_color_casilla(j, tableroAux.get(Byte.valueOf((byte) (ultimo_pincho_negro + 10))).getCombinacion()[j].getColor());
+						}
 						
 						//Los colocamos en la combinación que pondremos en el tablero
 						while (cont_color_restantes > 0) {
+							
+							posicion_actual = 0;
+							while (posicion_actual < color_en_cifr.length && color_en_cifr[posicion_actual]) {
+								posicion_actual++;
+							}
+							
 							if(color_en_cifr[posicion_actual] == false) {
 								color_en_cifr[posicion_actual] = true;
 								nueva_comb.cambiar_color_casilla(posicion_actual, coger_color(color_actual));
 								cont_color_restantes--;
+								
 							}
-								posicion_actual++;
+								
 							
 						}
 						
 					//Si no queda la misma cantidad de casillas que la cantidad del color escogido
 					}else {
+						if (cont_color_restantes == 0) {
+							cont_color_restantes = cant_colores[color_actual];
+						}
 							//Hacemos lo mismo que cuando teníamos una sola casilla para el color pero tantas veces como el color aparezca
 							if(tableroAux.containsKey(Byte.valueOf((byte)(ultimo_pincho_negro + 10)))) {
 								nueva_comb = analisis_intento();
@@ -413,8 +436,6 @@ public class IA extends Jugador {
 								nueva_comb.cambiar_color_casilla(posicion_actual, coger_color(color_actual));
 								posicion_actual++;
 							}
-							
-						
 						
 					}
 

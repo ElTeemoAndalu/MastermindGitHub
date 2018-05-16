@@ -1,6 +1,7 @@
 package mastermind;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 
 /**
  * Esta clase guarda una combinacion, que es un conjunto de objetos tipo Casilla y puede hacer comprobaciones y calculos de sobre esta además de dibujarla.
@@ -173,7 +174,7 @@ public class Combinacion implements CombinacionDibujable, Cloneable {
 	 * @return Array de dos numeros que contiene tras los indicadores negros en la primera posicion y los grises en la segunda posicion.
 	 * @see Casilla
 	 */
-	public int[] calcular_resultado(Combinacion cifrado) {
+	public int[] calcular_resultado2(Combinacion cifrado) {
 		int i, j,ind_Negr_Blan[] = {0,0};
 		final int NUM_CASILLAS = combinacion.length;
 		boolean en_resultado[] = new boolean[NUM_CASILLAS];
@@ -192,7 +193,7 @@ public class Combinacion implements CombinacionDibujable, Cloneable {
 
 		for (i = 0; i < NUM_CASILLAS; i++) {
 
-			for (j = 0; j < NUM_CASILLAS; j++) {
+			for (j = i; j < NUM_CASILLAS; j++) {
 				if (!en_resultado[j]) {
 					if (combinacion[i].getColor().equals(cifrado.getCombinacion()[j].getColor())) {
 						ind_Negr_Blan[1]++;
@@ -200,7 +201,50 @@ public class Combinacion implements CombinacionDibujable, Cloneable {
 					}
 				}
 			}
+			
 		}
+			
+		return ind_Negr_Blan;
+
+	}
+	
+	public int[] calcular_resultado(Combinacion cifrado) {
+		int ind_Negr_Blan[] = {0,0};
+		LinkedList<Casilla> intentoAux,cifradoAux;
+		
+		intentoAux = new LinkedList<>();
+		cifradoAux = new LinkedList<>();
+		
+		for (int i = 0; i < cifrado.tamanio(); i++) {
+			intentoAux.add(combinacion[i]);
+		}
+		
+		for (int i = 0; i < cifrado.tamanio(); i++) {
+			cifradoAux.add(cifrado.getCombinacion()[i]);
+		}
+		
+		for (int i = 0; i < cifradoAux.size(); i++) {
+			if (intentoAux.get(i).getColor().equals(cifradoAux.get(i).getColor())) {
+				ind_Negr_Blan[0]++;
+				intentoAux.remove(i);
+				cifradoAux.remove(i);
+				i--;
+			}
+		}
+		
+		for (int i = 0; i < cifradoAux.size(); i++) {
+			for (int j = 0; j < cifradoAux.size(); j++) {
+				if (intentoAux.get(i).getColor().equals(cifradoAux.get(j).getColor())) {
+					ind_Negr_Blan[1]++;
+					intentoAux.remove(i);
+					cifradoAux.remove(j);
+					j--;
+				}
+			}
+			
+		}
+		
+		
 			
 		return ind_Negr_Blan;
 
